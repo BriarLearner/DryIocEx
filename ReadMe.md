@@ -1,6 +1,12 @@
 # DryIocEx
 
-主要提供IOC，应用层事件中心，日志，网络等帮助库
+包含DryIocEx.Core和DryIocEx.Prism
+
+DryIocEx.Core:参考DryIoc
+
+DryIocEx.Prism:参考Prism
+
+## 提示
 
 1. 非必要所有功能写在前面，这样只要输入相关功能就能智能提示，虽然有一点反人类，但是用习惯之后提高效率
 
@@ -24,8 +30,6 @@
 **SupplyPipe**
 
 主要逻辑入下图所示，在Write前调用`await supplyrequire`会抑制写的速度，使得写的速度与读的速度保持一致。
-
-
 
 ## Base
 
