@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "targets": {},
+  "libraries": {},
+  "projectFileDependencyGroups": {},
+  "packageFolders": {
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\": {},
+    "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "restore": {
+      "projectUniqueName": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIoc\\DryIoc.csproj",
+      "projectPath": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIoc\\DryIoc.csproj",
+      "packagesPath": "C:\\Users\\Dujinfeng\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIoc\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\DevExpress 23.1\\Components\\Offline Packages",
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\Dujinfeng\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 23.1.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\DevExpress 23.1\\Components\\System\\Components\\Packages": {},
+        "C:\\UserPrograms\\CustomNuget": {},
+        "https://api.nuget.org/v3/index.json": {}
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "无法读取“DryIoc”的项目信息: 无效的框架标识符“”。"
+    }
+  ]
+}

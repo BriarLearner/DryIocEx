@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "NZH2KcwMNMegSaPZh8hN9V5iMjDDVMIuB5x0aYJPk+nEod7GEq4df9OgicCFP3Tk2yUB8Q6NKv6DmiYBQw1fMA==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIoc.Owin\\DryIoc.Owin.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\microsoft.owin\\4.2.2\\microsoft.owin.4.2.2.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\owin\\1.0.0\\owin.1.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 DryIoc 与 net45 (.NETFramework,Version=v4.5) 不兼容。 项目 DryIoc 不支持任何目标框架。",
+      "libraryId": "DryIoc",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.5"
+      ]
+    }
+  ]
+}

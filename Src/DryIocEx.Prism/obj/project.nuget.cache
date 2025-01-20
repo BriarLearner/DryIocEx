@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "ENtyyYR+DxQrU8kHb+m8tGoD8AmTSi7jrciNInSPPrUzQI9jJOSAMTKAwFOH3aYauAcGqq3WHicpCzu6RBZuIw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\DryIocEx.Prism.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\dryiocex.core\\1.1.2\\dryiocex.core.1.1.2.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.io.pipelines\\8.0.0\\system.io.pipelines.8.0.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.runtime\\4.3.1\\system.runtime.4.3.1.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.3\\system.runtime.compilerservices.unsafe.4.5.3.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.threading.channels\\8.0.0\\system.threading.channels.8.0.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+	  <!---windows-->
+	  <TargetFrameworks>net8.0-windows;net6.0-windows;net48;net472;net471</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <langversion>latest</langversion>
+    <Copyright>Copyright © 2020-2024 DryIocEx All Rights Reserved.</Copyright>
+    <Description>DryIocEx Prism Extension</Description>
+    <VersionPrefix>1.1.2</VersionPrefix>
+    <AssemblyName>DryIocEx.Prism</AssemblyName>
+    <RootNamespace>DryIocEx.Prism</RootNamespace>
+    <Title>DryIocEx.Prism</Title>
+	<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <PackageProjectUrl />
+  </PropertyGroup>
+	
+  <ItemGroup>
+    <PackageReference Include="DryIocEx.Core" Version="1.*" />
+  </ItemGroup>
+	<PropertyGroup>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+	</PropertyGroup>
+  <ItemGroup>
+    <Resource Include="Themes\generic.xaml" />
+    <Resource Include="Themes\icons.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
+		<Exec Command="Call D:\Reactor\dotNET_Reactor.Console.exe -project &quot;$(OutDir)\DryIocEx.nrproj&quot; -licensed" />
+	</Target>
+</Project>

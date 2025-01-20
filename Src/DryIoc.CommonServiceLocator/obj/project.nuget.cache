@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "gX5om7ksv6mWim7CzZp3u//HlEi44tppmcZ0yPYVZ3M2c87lyxVdcULjEOG4otw8cWwHxhBVA02Vh9bxZW1q0A==",
+  "success": false,
+  "projectFilePath": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIoc.CommonServiceLocator\\DryIoc.CommonServiceLocator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\commonservicelocator\\2.0.7\\commonservicelocator.2.0.7.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 DryIoc 与 netstandard2.0 (.NETStandard,Version=v2.0) 不兼容。 项目 DryIoc 不支持任何目标框架。",
+      "libraryId": "DryIoc",
+      "targetGraphs": [
+        ".NETStandard,Version=v2.0"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "项目 DryIoc 与 net7.0 (.NETCoreApp,Version=v7.0) 不兼容。 项目 DryIoc 不支持任何目标框架。",
+      "libraryId": "DryIoc",
+      "targetGraphs": [
+        "net7.0"
+      ]
+    }
+  ]
+}

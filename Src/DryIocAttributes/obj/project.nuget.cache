@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "plvw1KeDT/+AbPJx4Cx3W1BdMlNPPz60R4mpD366ogOMrrrEQNCcqe/1UjVKJoyX6mkG76F7qgIxuBznj1xGcg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocAttributes\\DryIocAttributes.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\system.componentmodel.composition\\5.0.0\\system.componentmodel.composition.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

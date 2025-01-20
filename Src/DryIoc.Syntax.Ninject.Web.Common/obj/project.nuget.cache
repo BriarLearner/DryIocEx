@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "y5pUCTGCV91OAWdYSzyf2gTY2MSj9L/r4kjEOHRFc5e0r57F+iHtlWlGBpZpoX3tWBvXUHM9K8lVksvgqbTq5A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIoc.Syntax.Ninject.Web.Common\\DryIoc.Syntax.Ninject.Web.Common.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\Dujinfeng\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

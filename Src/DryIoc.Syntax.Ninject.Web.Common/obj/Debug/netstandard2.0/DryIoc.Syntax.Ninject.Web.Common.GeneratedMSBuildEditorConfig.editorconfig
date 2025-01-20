@@ -1,0 +1,5 @@
+is_global = true
+build_property.RootNamespace = DryIoc.Syntax.Ninject.Web.Common
+build_property.ProjectDir = C:\Users\Dujinfeng\Documents\GitHub\DryIocEx\Src\DryIoc.Syntax.Ninject.Web.Common\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
