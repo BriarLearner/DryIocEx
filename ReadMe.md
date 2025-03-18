@@ -449,3 +449,87 @@ await UtilTask.RunTasks(30);
 验证数字
 
 验证中文
+
+# 通讯组件
+
+## 使用
+
+```
+var Server = new ASTMServer();//创建server，该服务实现链路连接通知，数据包收发
+ Server.SetSend(5, 10); //发送间隔设置和发送消息超时时间设置
+ Server.ConnectState += Server_ConnectState;//链路连接通知
+ Server.ReceiveGroupPackage += Server_ReceiveGroupPackage;//包接收通知
+ //创建服务,服务Ip和端口 Tag是服务标识key，当创建多个服务的时候，用Tag标识来区分服务
+ var ipendpoint = CreateEndPoint(ServerIp, ServerPort);
+ var client = new HISASTMServerBuilder(Server).UseTcp(ServerIp, ServerPort)
+    .UseSession(o => o.Tag = ipendpoint).UseLog(c => logger).Build();
+  client.StartAsync();
+ //创建客户端
+  var client = new HISASTMClientBuilder(server).UseTcp(RemoteIp, RemotePort)
+     .UseSession(o => o.Tag = clientendpoint)
+     .UseLog(c => logger).Build();
+ client.StartAsync();
+ 
+ 
+ void Server_ConnectState(IPEndPoint endpoint, bool isconnect)
+ {
+  var ipendpoint = Server.GetSessionOption(endpoint).Tag.To<IPEndPoint>();//获取标识Key
+ }
+ 
+ void Server_ReceiveGroupPackage(IPEndPoint endpoint, List<HISASTMPackage> list,
+        EnumGroupReason reason)
+        {
+        var ipendpoint = Server.GetSessionOption(endpoint).Tag.To<IPEndPoint>();//获取标识Key
+        }
+        
+```
+
+## 协议包
+
+### HISASTMPackage
+
+实现ASTM协议，解析包HISASTMPackage，该包采用池化技术，降低内存消耗
+
+```C#
+/// <summary>
+///     ASTM包
+/// </summary>
+public class HISASTMPackage : IDisposable
+{
+    ///创建时间
+    public DateTime CreateTime { get; private set; }
+
+    /// <summary>
+    ///     帧序号
+    /// </summary>
+    public int FrameIndex { set; get; }
+
+    /// <summary>
+    ///     包类型
+    /// </summary>
+    public EnumASTMPackageType Type { get; set; }
+
+    /// <summary>
+    ///     消息类型 消息结构中
+    /// </summary>
+    public string Identify { set; get; }
+
+    /// <summary>
+    ///     包序号
+    /// </summary>
+    public int PackageIndex { set; get; }
+
+    /// <summary>
+    ///     数据域
+    /// </summary>
+    public List<string> Fields { get; } = new();
+}
+```
+
+```C#
+var package = HISASTMPackage.Pool.Rent();//创建包
+package.Type = type;
+
+使用完后请调用package.Dispose();//返回内存池
+```
+
