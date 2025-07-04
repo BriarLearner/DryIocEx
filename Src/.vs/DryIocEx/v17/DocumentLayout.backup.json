@@ -1,0 +1,724 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\ioc\\container.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\ioc\\container.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\his\\hisastmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\his\\hisastmpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\channel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\channel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\connector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\listener.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\middleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\middleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\networkutil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\networkutil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\package.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\package.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\server.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\networkpro\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\networkpro\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\log\\logmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\log\\logmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\mvvm\\basedelegatecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\mvvm\\basedelegatecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\mvvm\\viewmodelfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\mvvm\\viewmodelfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\mvvm\\extensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\mvvm\\extensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\mvvm\\basebindable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\mvvm\\basebindable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\i18n\\languagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\i18n\\languagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\i18n\\ilanguagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\i18n\\ilanguagemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\i18n\\i18nextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\i18n\\i18nextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\converters\\rebooltovisibilityconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\converters\\rebooltovisibilityconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\converters\\mygeometryconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\converters\\mygeometryconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\converters\\booltoobjectconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\converters\\booltoobjectconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\sgnetwork\\sgpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\sgnetwork\\sgpackage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\manager\\optionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\manager\\optionmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\manager\\businessmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\manager\\businessmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\manager\\adaptermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\manager\\adaptermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\log\\nulllogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\log\\nulllogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\log\\loginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\log\\loginfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\log\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\log\\logger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\log\\filelogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\log\\filelogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\log\\logextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\log\\logextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\log\\consolelogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\log\\consolelogger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\ioc\\registryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\ioc\\registryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\ioc\\icontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\ioc\\icontainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.core\\aspdotnet\\modules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CA897EE9-9F9B-4C06-8F7F-9665E5B8A6AC}|DryIocEx.Core\\DryIocEx.Core.csproj|solutionrelative:dryiocex.core\\aspdotnet\\modules.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\applicationpro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\applicationpro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|c:\\users\\dujinfeng\\documents\\github\\dryiocex\\src\\dryiocex.prism\\dryiocex.prism.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{4AB674E5-F23B-43FA-8540-C580B5B7E6C1}|DryIocEx.Prism\\DryIocEx.Prism.csproj|solutionrelative:dryiocex.prism\\dryiocex.prism.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 322,
+          "SelectedChildIndex": 39,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{faabacce-1340-5da9-adf5-fe7e951d356f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{110a03fe-5606-4129-8e36-1fb89b195583}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a33ca030-064b-5991-ba18-12eb0f56cedd}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ViewModelFactory.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\MVVM\\ViewModelFactory.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\MVVM\\ViewModelFactory.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\MVVM\\ViewModelFactory.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\MVVM\\ViewModelFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:13:14.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Extensions.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\MVVM\\Extensions.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\MVVM\\Extensions.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\MVVM\\Extensions.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\MVVM\\Extensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:13:14.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "BaseBindable.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\MVVM\\BaseBindable.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\MVVM\\BaseBindable.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\MVVM\\BaseBindable.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\MVVM\\BaseBindable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:13:11.798Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "BaseDelegateCommand.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\MVVM\\BaseDelegateCommand.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\MVVM\\BaseDelegateCommand.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\MVVM\\BaseDelegateCommand.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\MVVM\\BaseDelegateCommand.cs",
+              "ViewState": "AgIAACQBAAAAAAAAAAA0wC4BAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:13:10.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "LanguageManager.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\I18n\\LanguageManager.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\I18n\\LanguageManager.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\I18n\\LanguageManager.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\I18n\\LanguageManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:13:08.527Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "ILanguageManager.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\I18n\\ILanguageManager.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\I18n\\ILanguageManager.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\I18n\\ILanguageManager.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\I18n\\ILanguageManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:13:06.571Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "I18nExtension.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\I18n\\I18nExtension.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\I18n\\I18nExtension.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\I18n\\I18nExtension.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\I18n\\I18nExtension.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:13:05.452Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ReBoolToVisibilityConverter.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\Converters\\ReBoolToVisibilityConverter.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\Converters\\ReBoolToVisibilityConverter.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\Converters\\ReBoolToVisibilityConverter.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\Converters\\ReBoolToVisibilityConverter.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:13:00.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "MyGeometryConverter.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\Converters\\MyGeometryConverter.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\Converters\\MyGeometryConverter.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\Converters\\MyGeometryConverter.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\Converters\\MyGeometryConverter.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:12:56.034Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "BoolToObjectConverter.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\Converters\\BoolToObjectConverter.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\Converters\\BoolToObjectConverter.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\Converters\\BoolToObjectConverter.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\Converters\\BoolToObjectConverter.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:12:49.95Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HISASTMPackage.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\HIS\\HISASTMPackage.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\HIS\\HISASTMPackage.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\HIS\\HISASTMPackage.cs",
+              "RelativeToolTip": "DryIocEx.Core\\HIS\\HISASTMPackage.cs",
+              "ViewState": "AgIAAFEDAAAAAAAAAAAAwGADAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:10:46.802Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "SGPackage.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\SGNetwork\\SGPackage.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\SGNetwork\\SGPackage.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\SGNetwork\\SGPackage.cs",
+              "RelativeToolTip": "DryIocEx.Core\\SGNetwork\\SGPackage.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:10:22.89Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Session.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Session.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\Session.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Session.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\Session.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvwkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:10:19.178Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Server.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Server.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\Server.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Server.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\Server.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEsBAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:10:17.349Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Package.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Package.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\Package.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Package.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\Package.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAcwHwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:10:16.205Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Middleware.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Middleware.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\Middleware.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Middleware.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\Middleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:10:14.359Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NetworkUtil.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\NetworkUtil.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\NetworkUtil.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\NetworkUtil.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\NetworkUtil.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:10:13.383Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Listener.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Listener.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\Listener.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Listener.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\Listener.cs",
+              "ViewState": "AgIAALgAAAAAAAAAAAAIwF4AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:10:02.8Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Connector.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Connector.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\Connector.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Connector.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\Connector.cs",
+              "ViewState": "AgIAAJEAAAAAAAAAAAAmwMQAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:09:56.36Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Client.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\Client.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Client.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\Client.cs",
+              "ViewState": "AgIAAKEBAAAAAAAAAAAUwIwBAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:09:30.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Channel.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Channel.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\NetworkPro\\Channel.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\NetworkPro\\Channel.cs",
+              "RelativeToolTip": "DryIocEx.Core\\NetworkPro\\Channel.cs",
+              "ViewState": "AgIAACYCAAAAAAAAAAAzwPsCAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:08:38.744Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "OptionManager.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Manager\\OptionManager.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Manager\\OptionManager.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Manager\\OptionManager.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Manager\\OptionManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:08:35.466Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "BusinessManager.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Manager\\BusinessManager.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Manager\\BusinessManager.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Manager\\BusinessManager.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Manager\\BusinessManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:08:30.47Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "AdapterManager.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Manager\\AdapterManager.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Manager\\AdapterManager.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Manager\\AdapterManager.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Manager\\AdapterManager.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAswAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:08:06.007Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "NULLLogger.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\NULLLogger.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Log\\NULLLogger.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\NULLLogger.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Log\\NULLLogger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:07:49.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LogManager.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\LogManager.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Log\\LogManager.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\LogManager.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Log\\LogManager.cs",
+              "ViewState": "AgIAAHIAAAAAAAAAAAAWwH8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:07:32.543Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "LogInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\LogInfo.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Log\\LogInfo.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\LogInfo.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Log\\LogInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:07:30.454Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Logger.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\Logger.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Log\\Logger.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\Logger.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Log\\Logger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:07:29.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "LogExtension.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\LogExtension.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Log\\LogExtension.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\LogExtension.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Log\\LogExtension.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:07:26.744Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "FileLogger.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\FileLogger.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Log\\FileLogger.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\FileLogger.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Log\\FileLogger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:07:26.036Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "ConsoleLogger.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\ConsoleLogger.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\Log\\ConsoleLogger.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\Log\\ConsoleLogger.cs",
+              "RelativeToolTip": "DryIocEx.Core\\Log\\ConsoleLogger.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:07:19.726Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "RegistryInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\IOC\\RegistryInfo.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\IOC\\RegistryInfo.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\IOC\\RegistryInfo.cs",
+              "RelativeToolTip": "DryIocEx.Core\\IOC\\RegistryInfo.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAmwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:06:53.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "IContainer.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\IOC\\IContainer.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\IOC\\IContainer.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\IOC\\IContainer.cs",
+              "RelativeToolTip": "DryIocEx.Core\\IOC\\IContainer.cs",
+              "ViewState": "AgIAABgBAAAAAAAAAAAIwCgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:05:53.946Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Container.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\IOC\\Container.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\IOC\\Container.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\IOC\\Container.cs",
+              "RelativeToolTip": "DryIocEx.Core\\IOC\\Container.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:03:32.829Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Modules.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\AspDotNet\\Modules.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Core\\AspDotNet\\Modules.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Core\\AspDotNet\\Modules.cs",
+              "RelativeToolTip": "DryIocEx.Core\\AspDotNet\\Modules.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:03:11.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "ApplicationPro.cs",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\ApplicationPro.cs",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\ApplicationPro.cs",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\ApplicationPro.cs",
+              "RelativeToolTip": "DryIocEx.Prism\\ApplicationPro.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-04T14:02:40.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "DryIocEx.Prism.csproj",
+              "DocumentMoniker": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\DryIocEx.Prism.csproj",
+              "RelativeDocumentMoniker": "DryIocEx.Prism\\DryIocEx.Prism.csproj",
+              "ToolTip": "C:\\Users\\Dujinfeng\\Documents\\GitHub\\DryIocEx\\Src\\DryIocEx.Prism\\DryIocEx.Prism.csproj",
+              "RelativeToolTip": "DryIocEx.Prism\\DryIocEx.Prism.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwoAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-07-04T14:02:21.585Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:141:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:146:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:142:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:143:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:144:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:145:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:147:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

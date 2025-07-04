@@ -20,7 +20,7 @@ public class StringPackage
 {
     public StringPackage(string text)
     {
-        throw new NotImplementedException();
+        Text = text;
     }
 
     public string Text { set; get; }
@@ -30,14 +30,20 @@ public class StringPackageFilter : IPackageFilter<StringPackage>
 {
     public StringPackage Filter(ref SequenceReader<byte> reader)
     {
-        throw new NotImplementedException();
+        return new StringPackage(reader.ReadString(Encoding.UTF8));
     }
 
     public ReadOnlyMemory<byte> Converter(StringPackage package)
     {
-        throw new NotImplementedException();
+        return Encoding.UTF8.GetBytes(package.Text);
     }
 
+    //public ValueTask WriteAsync(IBufferWriter<byte> writer, StringPackage package)
+    //{
+
+    //    var count=  writer.Write(package.Text.AsSpan(), Encoding.UTF8);
+    //     return new ValueTask();
+    //}
 
     public void Reset()
     {
@@ -50,12 +56,24 @@ public abstract class TerminatorPackageFilter<TPackage> : IPackageFilter<TPackag
 
     public TerminatorPackageFilter(ReadOnlyMemory<byte> terminator)
     {
-        throw new NotImplementedException();
+        _terminator = terminator;
     }
 
     public TPackage Filter(ref SequenceReader<byte> reader)
     {
-        throw new NotImplementedException();
+        var terminator = _terminator;
+        var span = terminator.Span;
+        ReadOnlySequence<byte> sequence;
+        if (!reader.TryReadTo(out sequence, span, false))
+            return default;
+        try
+        {
+            return Decoder(ref sequence);
+        }
+        finally
+        {
+            reader.Advance(terminator.Length);
+        }
     }
 
 
@@ -75,12 +93,12 @@ public class LineStringPackageFilter : TerminatorPackageFilter<StringPackage>
 
     protected override StringPackage Decoder(ref ReadOnlySequence<byte> sequence)
     {
-        throw new NotImplementedException();
+        return new StringPackage(sequence.GetString(Encoding.UTF8));
     }
 
     public override ReadOnlyMemory<byte> Converter(StringPackage package)
     {
-        throw new NotImplementedException();
+        return Encoding.UTF8.GetBytes(package.Text);
     }
 
     public override void Reset()

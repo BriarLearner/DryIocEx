@@ -16,7 +16,10 @@ public class Container : IDisposable, IContainer
 
 
     private volatile bool _disposed;
-
+    /// <summary>
+    /// 创建一个容器实例
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
     public Container()
     {
         throw new NotImplementedException();
@@ -69,37 +72,65 @@ public class Container : IDisposable, IContainer
         throw new NotImplementedException();
     }
 
-
+    /// <summary>
+    /// 获取对象
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
     public object Resolve(KeyInfo key)
     {
         throw new NotImplementedException();
     }
-
+    /// <summary>
+    /// 销毁
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
     public void Dispose()
     {
         throw new NotImplementedException();
     }
-
+    /// <summary>
+    /// 内部获取
+    /// </summary>
+    /// <param name="registry"></param>
+    /// <param name="genericargs"></param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
     private object InnerGetService(RegistryInfo registry, Type[] genericargs)
     {
         throw new NotImplementedException();
     }
-
+    /// <summary>
+    /// 检测是否已经被释放
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
     private void NotDisposed()
     {
         throw new NotImplementedException();
     }
 }
-
+/// <summary>
+/// 容器创建器
+/// </summary>
 public class ContainerBuilder : BaseBuilder<ContainerBuilder, IContainer>
 {
+    /// <summary>
+    /// 容器
+    /// </summary>
     private readonly IContainer _container;
-
+    /// <summary>
+    /// 容器创建
+    /// </summary>
     public ContainerBuilder() : this(new Container())
     {
     }
 
-
+    /// <summary>
+    /// 容器创建
+    /// </summary>
+    /// <param name="container"></param>
+    /// <exception cref="NotImplementedException"></exception>
     public ContainerBuilder(IContainer container)
     {
         throw new NotImplementedException();

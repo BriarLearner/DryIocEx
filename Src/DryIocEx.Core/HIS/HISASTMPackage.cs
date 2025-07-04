@@ -99,12 +99,15 @@ public class HISASTMPackagePool : Pool<HISASTMPackage>
 {
     public override void Return(HISASTMPackage sub)
     {
-        throw new NotImplementedException();
+        if (_queue.Contains(sub)) return;
+        base.Return(sub);
     }
 
     public override HISASTMPackage Rent()
     {
-        throw new NotImplementedException();
+        var operate = base.Rent();
+        operate.Initial();
+        return operate;
     }
 }
 
@@ -117,7 +120,8 @@ public class HISASTMPackage : IDisposable
 
     public HISASTMPackage()
     {
-        throw new NotImplementedException();
+
+        Initial();
     }
 
     public static IPool<HISASTMPackage> Pool { get; } = new HISASTMPackagePool();
@@ -154,17 +158,36 @@ public class HISASTMPackage : IDisposable
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        if (Disposable) return;
+        if (Interlocked.CompareExchange(ref disflag, 1, 0) != 0) return;
+        Disposable = true;
+        Pool.Return(this);
     }
 
     internal void Initial()
     {
-        throw new NotImplementedException();
+        Interlocked.Exchange(ref disflag, 0);
+        Disposable = false;
+
+        FrameIndex = default;
+        Type = default;
+        Identify = default;
+        PackageIndex = default;
+        CreateTime = DateTime.Now;
+        Fields.Clear();
     }
 
     public HISASTMPackage Clone()
     {
-        throw new NotImplementedException();
+        var package = new HISASTMPackage
+        {
+            FrameIndex = FrameIndex,
+            Type = Type,
+            Identify = Identify,
+            PackageIndex = PackageIndex
+        };
+        package.Fields.AddRange(Fields);
+        return package;
     }
 }
 
@@ -207,12 +230,97 @@ public class HISASTMPackageFilter : IPackageFilter<HISASTMPackage>
 {
     public HISASTMPackage Filter(ref SequenceReader<byte> reader)
     {
-        throw new NotImplementedException();
+        //1.检测第一个字节是否是 识别的字节
+        var type = GetType(reader);
+        //2.不是过滤掉
+        if (type == EnumASTMPackageType.Unknown) //过滤掉未知数据
+        {
+            reader.Advance(1);
+            return null;
+        }
+
+        //3.第一个字节是STX,解析STX
+        if (type == EnumASTMPackageType.STX)
+        {
+#if NET
+            var temsequence = reader.UnreadSequence;
+#else
+            var temsequence = reader.Sequence.Slice(reader.Consumed);
+#endif
+
+            var readlean = TryReadTo(temsequence);
+            if (readlean < 0)
+            {
+                reader.Advance(reader.Remaining);
+                return null;
+            }
+
+            if (readlean == 0) return null;
+            reader.Advance(readlean);
+            var spack = temsequence.Slice(0, readlean);
+
+            
+            if (spack.Length < 10) return null; 
+            //3.3验证crc
+#if NET
+            var crc = Encoding.ASCII.GetString(spack.Slice(spack.Length - 4, 2));
+#else
+            var crc = Encoding.UTF8.GetString(spack.Slice(spack.Length - 4, 2).ToArray()); 
+#endif
+
+            var keyvaluereader = new SequenceReader<byte>(spack.Slice(0, spack.Length - 4)); 
+            var sum = 0;
+            byte temvalue = 0;
+            while (keyvaluereader.TryRead(out temvalue)) sum += temvalue;
+            var calcrc = (sum % 0x100).ToString("X2"); 
+            if (!calcrc.Equals(crc, StringComparison.OrdinalIgnoreCase)) return null; 
+            return Decoder(ref spack, null);
+        }
+
+        var package = HISASTMPackage.Pool.Rent();
+        package.Type = type;
+        reader.Advance(1);
+        return package;
     }
 
     public ReadOnlyMemory<byte> Converter(HISASTMPackage pack)
     {
-        throw new NotImplementedException();
+        if (pack == null) return Array.Empty<byte>();
+        switch (pack.Type)
+        {
+            case EnumASTMPackageType.ENQ:
+                return new[] { ASTMConst.ENQ };
+            case EnumASTMPackageType.ACK:
+                return new[] { ASTMConst.ACK };
+            case EnumASTMPackageType.NAK:
+                return new[] { ASTMConst.NAK };
+            case EnumASTMPackageType.EOT:
+                return new[] { ASTMConst.EOT };
+            case EnumASTMPackageType.HT:
+                return new[] { ASTMConst.HT };
+            case EnumASTMPackageType.STX:
+                var list = new List<byte>();
+                list.Add(ASTMConst.STX);
+                list.Add((byte)(pack.FrameIndex % 8).ToString("D1").First());
+                list.Add((byte)pack.Identify.ToUpper().First());
+                list.Add(ASTMConst.charField);
+                list.Add((byte)pack.PackageIndex.ToString("D1").First());
+
+                if (pack.Fields.Any())
+                {
+                    list.Add(ASTMConst.charField);
+                    list.AddRange(Encoding.UTF8.GetBytes(string.Join("|", pack.Fields)));
+                }
+
+                list.Add(ASTMConst.CR);
+                list.Add(ASTMConst.ETX);
+                list.AddRange(Encoding.UTF8.GetBytes((list.Sum(s => s) % 0x100).ToString("X2")));
+                list.Add(ASTMConst.CR);
+                list.Add(ASTMConst.LF);
+                return list.ToArray();
+            default:
+                return Array.Empty<byte>();
+        }
     }
 
     public void Reset()
@@ -221,17 +329,85 @@ public class HISASTMPackageFilter : IPackageFilter<HISASTMPackage>
 
     private long TryReadTo(ReadOnlySequence<byte> sequence)
     {
-        throw new NotImplementedException();
+        var reader = new SequenceReader<byte>(sequence);
+        try
+        {
+            var exit = false;
+            do
+            {
+                var find = reader.TryReadTo(out ReadOnlySequence<byte> spack, ASTMConst.CRLF);
+                if (!find)
+                {
+                    if (reader.Length < 4 * 1024) //一个包的长度不能超过4K
+                    {
+                        exit = true;
+                        return 0; //有可能分包了
+                    }
+
+                    exit = true;
+                    return -1; //异常包 全部丢弃
+                }
+
+                if (spack.Length < 4)
+                {
+                }
+                else
+                {
+                    var slice = spack.Slice(spack.Length - 4, 2);
+                    var temre = new SequenceReader<byte>(slice);
+                    temre.TryRead(out var temcr);
+                    temre.TryRead(out var temetx);
+                    if (temcr == ASTMConst.CR && (temetx == ASTMConst.ETX || temetx == ASTMConst.ETB))
+                    {
+                        exit = true;
+                        return reader.Consumed;
+                    }
+                }
+            } while (!exit);
+        }
+        catch (Exception e)
+        {
+        }
+
+        return -1; //异常结束全部丢弃
     }
 
     private HISASTMPackage Decoder(ref ReadOnlySequence<byte> buffer, object context)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var content = buffer.Slice(1, buffer.Length - 7);
+#if NET
+            var parameters = Encoding.UTF8.GetString(content).Split('|');
+#else
+            var parameters = Encoding.UTF8.GetString(content.ToArray()).Split('|');
+#endif
+
+            if (parameters.Length < 2 || parameters[0].Length < 2) return null; //无效包 
+            var package = HISASTMPackage.Pool.Rent();
+            package.Type = EnumASTMPackageType.STX;
+            package.FrameIndex = int.Parse(parameters[0][0].ToString());
+            package.Identify = parameters[0][1].ToString();
+            package.PackageIndex = int.Parse(parameters[1]);
+            if (parameters.Length > 2) package.Fields.AddRange(parameters.Skip(2).ToArray());
+            return package;
+        }
+        catch (Exception e)
+        {
+        }
+
+        return null;
     }
 
     private EnumASTMPackageType GetType(SequenceReader<byte> reader)
     {
-        throw new NotImplementedException();
+        if (reader.IsNext(ASTMConst.ENQ)) return EnumASTMPackageType.ENQ;
+        if (reader.IsNext(ASTMConst.ACK)) return EnumASTMPackageType.ACK;
+        if (reader.IsNext(ASTMConst.NAK)) return EnumASTMPackageType.NAK;
+        if (reader.IsNext(ASTMConst.EOT)) return EnumASTMPackageType.EOT;
+        if (reader.IsNext(ASTMConst.STX)) return EnumASTMPackageType.STX;
+        if (reader.IsNext(ASTMConst.HT)) return EnumASTMPackageType.HT;
+        return EnumASTMPackageType.Unknown;
     }
 }
 
@@ -246,24 +422,34 @@ public class HISASTMMiddleware : IHISASTMMiddleware
     //注入的时候要额外注入Server
     public HISASTMMiddleware(IASTMServer server)
     {
-        throw new NotImplementedException();
+        ASTMServer = server;
     }
 
     public int Order { get; }
 
     public ValueTask Handle(ISession<HISASTMPackage> session, HISASTMPackage package)
     {
-        throw new NotImplementedException();
+        try
+        {
+            ASTMServer.ReceivePackage(session, package);
+        }
+        catch (Exception e)
+        {
+        }
+
+        return new ValueTask();
     }
 
     public ValueTask UnRegister(ISession<HISASTMPackage> session)
     {
-        throw new NotImplementedException();
+        if (session != null) ASTMServer.DisConnect(session);
+        return new ValueTask();
     }
 
     ValueTask IMiddleware<HISASTMPackage>.Register(ISession<HISASTMPackage> session)
     {
-        throw new NotImplementedException();
+        ASTMServer.ReceiveConnect(session);
+        return new ValueTask();
     }
 }
 
@@ -275,7 +461,9 @@ public class HISASTMHeartMiddleware : IHISASTMHeartMiddleware
 {
     public HISASTMHeartMiddleware()
     {
-        throw new NotImplementedException();
+        var package = new HISASTMPackage();
+        package.Type = EnumASTMPackageType.HT;
+        HeartPackage = package;
     }
 
     private HISASTMPackage HeartPackage { get; }
@@ -283,17 +471,30 @@ public class HISASTMHeartMiddleware : IHISASTMHeartMiddleware
 
     public ValueTask Register(ISession<HISASTMPackage> session)
     {
-        throw new NotImplementedException();
+        Task.Run(async () =>
+        {
+            while (!session.IsStop)
+                try
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(5));
+                    await session.SendAsync(HeartPackage);
+                    await Task.Delay(TimeSpan.FromSeconds(10));
+                }
+                catch (Exception e)
+                {
+                }
+        }).DoNotAwait();
+        return new ValueTask();
     }
 
     public ValueTask UnRegister(ISession<HISASTMPackage> session)
     {
-        throw new NotImplementedException();
+        return new ValueTask();
     }
 
     public ValueTask Handle(ISession<HISASTMPackage> session, HISASTMPackage package)
     {
-        throw new NotImplementedException();
+        return new ValueTask();
     }
 }
 
@@ -350,7 +551,9 @@ internal class GroupASTMPackage
     public GroupASTMPackage(IPEndPoint ipendpoint,
         Action<IPEndPoint, List<HISASTMPackage>, EnumGroupReason> autohandlegroup, int alivetime = 30)
     {
-        throw new NotImplementedException();
+        IPEndpoint = ipendpoint;
+        action = autohandlegroup;
+        aliveTime = alivetime;
     }
 
 
@@ -360,12 +563,25 @@ internal class GroupASTMPackage
 
     public void SetGroupPackage(EnumGroupReason reason)
     {
-        throw new NotImplementedException();
+        GroupReason = reason;
+        IsGroup = true;
+        action?.Invoke(IPEndpoint, Group, GroupReason);
     }
 
     public void AddPackage(HISASTMPackage package)
     {
-        throw new NotImplementedException();
+        Group.Add(package);
+        LastReceiveTime = DateTime.Now;
+        Task.Run(async () =>
+        {
+            await Task.Delay(aliveTime * 1000);
+            if (DateTime.Now - LastReceiveTime > TimeSpan.FromSeconds(aliveTime) && !IsGroup)
+            {
+                //超时自动打包
+                SetGroupPackage(EnumGroupReason.OutTime);
+                action.Invoke(IPEndpoint, Group, GroupReason);
+            }
+        });
     }
 }
 
@@ -428,24 +644,49 @@ public class ASTMServer : IASTMServer
     /// <param name="sendinternal">每次发包间隔/ms</param>
     public void SetSend(int timeout, int sendinternal)
     {
-        throw new NotImplementedException();
+        _sendOutTime = timeout;
+        _sendInternal = sendinternal;
     }
 
     //服务端是远程IP，客户端是本地IP，对于
     public void ReceiveConnect(ISession<HISASTMPackage> session)
     {
-        throw new NotImplementedException();
+        var endpoint = session.GetKey<IPEndPoint>();
+        if (endpoint != null && CanAccept(endpoint))
+        {
+            Clients[endpoint] = session;
+            ConnectState?.Invoke(endpoint, true);
+        }
+        else
+        {
+            session.Stop();
+        }
     }
 
     public void DisConnect(ISession<HISASTMPackage> session)
     {
-        throw new NotImplementedException();
+        var endpoint = session.GetKey<IPEndPoint>();
+        if (endpoint != null)
+        {
+            if (Clients.ContainsKey(endpoint))
+            {
+                ConnectState?.Invoke(endpoint, false);
+                Clients.TryRemove(endpoint, out var temvalue);
+            }
+        }
     }
 
 
     public async void StopAll()
     {
-        throw new NotImplementedException();
+        if (Clients.Any())
+        {
+            var clients = Clients.Values.ToArray();
+
+            foreach (var client in clients) client.Stop(StopReason.RemoteClosing);
+
+            Clients.Clear();
+        }
     }
 
 
@@ -453,28 +694,151 @@ public class ASTMServer : IASTMServer
 
     public void ReceivePackage(ISession<HISASTMPackage> session, HISASTMPackage package)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var ipendpoint = session.GetKey<IPEndPoint>();
+            if (ipendpoint == null) return;
+
+            try
+            {
+                ReceiveSinglePackage?.Invoke(ipendpoint, package);
+            }
+            catch (Exception e)
+            {
+            }
+
+            if (package.Type == EnumASTMPackageType.ENQ)
+            {
+                SendACK(session);
+                //如果包含旧数据
+                if (CacheGroupPackage.ContainsKey(ipendpoint))
+                {
+                    if (CacheGroupPackage.TryRemove(ipendpoint, out var group))
+                    {
+                        group.SetGroupPackage(EnumGroupReason.BreakUp);
+                    }
+
+                }
+
+                //接收到新的数据开始
+                var newgroup = new GroupASTMPackage(ipendpoint, HandleAutoGroup);
+                newgroup.AddPackage(package);
+                CacheGroupPackage[ipendpoint] = newgroup;
+                return;
+            }
+
+            if (package.Type == EnumASTMPackageType.EOT)
+            {
+                if (CacheGroupPackage.ContainsKey(ipendpoint))
+                {
+                    //正常结束
+                    if (CacheGroupPackage.TryRemove(ipendpoint, out var temgroup))
+                    {
+                        temgroup.AddPackage(package);
+                        temgroup.SetGroupPackage(EnumGroupReason.Success);
+                    }
+                }
+
+                return;
+            }
+
+            //心跳
+            if (package.Type == EnumASTMPackageType.HT)
+            {
+                package.Dispose();
+                return;
+            }
+
+            if (package.Type == EnumASTMPackageType.ACK)
+            {
+                //发送完等待ACK,通知发送成功
+                //没有发送，收到到ACK，丢弃
+                if (WaitACK.ContainsKey(ipendpoint)) WaitACK[ipendpoint].TrySetResult(1);
+                return;
+            }
+
+            if (package.Type == EnumASTMPackageType.NAK)
+            {
+                if (WaitACK.ContainsKey(ipendpoint)) WaitACK[ipendpoint].TrySetResult(3);
+                return;
+            }
+
+            if (package.Type == EnumASTMPackageType.STX)
+            {
+                SendACK(session);
+                if (CacheGroupPackage.ContainsKey(ipendpoint))
+                {
+                    var group = CacheGroupPackage[ipendpoint];
+                    group.AddPackage(package);
+                }
+                return;
+            }
+
+            HandleUnknownPackage(ipendpoint, package);
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     public async Task<EnumSendResult> SendGroupASTMPackage(IPEndPoint ipendpoint, List<HISASTMPackage> list)
     {
-        throw new NotImplementedException();
+        if (!Clients.ContainsKey(ipendpoint)) return EnumSendResult.NotFind;
+        if (list != null && list.Any())
+        {
+            if (!SendQueue.ContainsKey(ipendpoint))
+                try
+                {
+                    //这边用双检，发现外部大量 taskrun这个方法的时候，这边有问题
+                    LockSendQueue.Enter();
+                    if (!SendQueue.ContainsKey(ipendpoint))
+                    {
+                        SendQueue[ipendpoint] = new ConcurrentQueue<SendASTMInfo>();
+                        SendFlag[ipendpoint] = new SendFlagModel();
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+                finally
+                {
+                    LockSendQueue.Leave();
+                }
+
+            var sendinfo = new SendASTMInfo(list);
+            var queue = SendQueue[ipendpoint];
+            queue.Enqueue(sendinfo);
+
+            InnerStartSend(ipendpoint);
+            await sendinfo.WaitTask.Task;
+            return sendinfo.Result;
+        }
+
+        return EnumSendResult.None;
     }
 
     public SessionOption GetSessionOption(IPEndPoint endpoint)
     {
-        throw new NotImplementedException();
+        if (Clients.ContainsKey(endpoint)) return Clients[endpoint].GetOption<SessionOption>();
+
+        return null;
     }
 
     private bool CanAccept(IPEndPoint endpoint)
     {
-        throw new NotImplementedException();
+        return true;
     }
 
 
     private void HandleUnknownPackage(IPEndPoint ipendpoint, HISASTMPackage package)
     {
-        throw new NotImplementedException();
+        try
+        {
+            ReceiveUnknownPackage?.Invoke(ipendpoint, package);
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     /// <summary>
@@ -484,7 +848,14 @@ public class ASTMServer : IASTMServer
     /// <param name="group"></param>
     private void HandleAutoGroup(IPEndPoint endpoint, List<HISASTMPackage> group, EnumGroupReason reason)
     {
-        throw new NotImplementedException();
+        try
+        {
+            CacheGroupPackage.TryRemove(endpoint, out var temgroup);
+            ReceiveGroupPackage?.Invoke(endpoint, group, reason);
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     private void SendACK(ISession<HISASTMPackage> session)
@@ -494,17 +865,93 @@ public class ASTMServer : IASTMServer
 
     private void InnerStartSend(IPEndPoint ipendpoint)
     {
-        throw new NotImplementedException();
+        if (Interlocked.CompareExchange(ref SendFlag[ipendpoint].IsSending, 1, 0) == 0)
+            Task.Run(() =>
+            {
+                try
+                {
+                    InnerSend(ipendpoint);
+                }
+                finally
+                {
+                    Interlocked.Exchange(ref SendFlag[ipendpoint].IsSending, 0); //正在发送
+                }
+            });
     }
 
     private void InnerSend(IPEndPoint ipendpoint)
     {
-        throw new NotImplementedException();
+        if (SendQueue.TryGetValue(ipendpoint, out var queue))
+            try
+            {
+                
+                while (queue.TryDequeue(out var sendinfo) && sendinfo != null)
+                   
+                {
+                    try
+                    {
+                        var success = true;
+                        if (sendinfo.Packages != null && sendinfo.Packages.Any())
+                            foreach (var package in sendinfo.Packages)
+                            {
+                                var result = InnerSendPackage(ipendpoint, package).Result;
+                                if (result != EnumSendResult.Success)
+                                {
+                                    sendinfo.Result = result;
+                                    success = false;
+                                    break;
+                                }
+                            }
+
+                        if (success) sendinfo.Result = EnumSendResult.Success;
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                    finally
+                    {
+                        sendinfo.WaitTask.TrySetResult(true);
+                    }
+
+                    //上位机解析每次接收延迟10ms 用我自己的解析器没有问题，真不知道当时是怎么想的
+                    if (_sendInternal > 0)
+                        Task.Delay(_sendInternal).Wait();
+                }
+            }
+            catch (Exception e)
+            {
+            }
     }
 
     private async Task<EnumSendResult> InnerSendPackage(IPEndPoint ipendpoint, HISASTMPackage package)
     {
-        throw new NotImplementedException();
+        if (Clients.ContainsKey(ipendpoint))
+        {
+            var session = Clients[ipendpoint];
+            try
+            {
+                if (package.Type == EnumASTMPackageType.EOT ||
+                    package.Type == EnumASTMPackageType.ACK ||
+                    package.Type == EnumASTMPackageType.NAK ||
+                    package.Type == EnumASTMPackageType.HT
+                   )
+                {
+                    await session.SendAsync(package);
+                    return EnumSendResult.Success;
+                }
+            }
+            catch (Exception e)
+            {
+            }
+            finally
+            {
+                WaitACK.TryRemove(ipendpoint, out var obcts);
+            }
+
+            return EnumSendResult.Fail;
+        }
+
+        return EnumSendResult.NotFind;
     }
 
     private class SendFlagModel
@@ -542,7 +989,9 @@ public class HISASTMClientBuilder : TcpClientBuilder<HISASTMPackage, HISASTMClie
 {
     public HISASTMClientBuilder(IASTMServer server)
     {
-        throw new NotImplementedException();
+        UseMiddleware(new HISASTMMiddleware(server));
+        UseReconnect();
+        UseFilter<HISASTMPackageFilter>();
     }
 }
 
@@ -550,6 +999,7 @@ public class HISASTMServerBuilder : TcpServerBuilder<HISASTMPackage, HISASTMServ
 {
     public HISASTMServerBuilder(IASTMServer server)
     {
-        throw new NotImplementedException();
+        UseMiddleware(new HISASTMMiddleware(server));
+        UseFilter<HISASTMPackageFilter>();
     }
 }

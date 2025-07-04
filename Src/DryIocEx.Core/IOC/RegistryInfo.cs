@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace DryIocEx.Core.IOC;
-
+/// <summary>
+/// 容器扩展
+/// </summary>
 internal static class IOCInfoExtension
 {
     public static KeyInfo ToKeyInfo(this Type type)

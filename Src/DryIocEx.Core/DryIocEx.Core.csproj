@@ -37,11 +37,4 @@
 		<PackageReference Include="Microsoft.CSharp" Version="4.*" />
 		<PackageReference Include="System.Runtime" Version="4.*" />
 	</ItemGroup>
-	<!--<ItemGroup Condition="'$(TargetFramework)'=='net471'or '$(TargetFramework)'=='net472'or '$(TargetFramework)'=='net48'">
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-  </ItemGroup>-->
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
-		<Exec Command="Call D:\Reactor\dotNET_Reactor.Console.exe -project &quot;$(OutDir)\DryIocEx.nrproj&quot; -licensed" />
-	</Target>
 </Project>

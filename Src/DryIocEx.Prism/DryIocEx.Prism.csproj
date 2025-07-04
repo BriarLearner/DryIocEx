@@ -28,8 +28,4 @@
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
-
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
-		<Exec Command="Call D:\Reactor\dotNET_Reactor.Console.exe -project &quot;$(OutDir)\DryIocEx.nrproj&quot; -licensed" />
-	</Target>
 </Project>

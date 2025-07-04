@@ -21,12 +21,23 @@ public class MiddlewareManager<TPackage> : IMiddlewareManager<TPackage>
 
     public void Register(IEnumerable<IMiddleware<TPackage>> middlewares)
     {
-        throw new NotImplementedException();
+        if (middlewares != null && middlewares.Any())
+            foreach (var middleware in middlewares.OrderBy(s => s.Order))
+            {
+                var inter = middleware.GetType().GetInterfaces()
+                    .FirstOrDefault(s => s != typeof(IMiddleware<TPackage>));
+                if (inter == null)
+                    throw new ArgumentException(
+                        $"this {middleware.GetType().FullName} not have single self interface");
+                middlewaredict[inter] = middleware;
+            }
     }
 
     public TMiddleware GetMiddleware<TMiddleware>()
     {
-        throw new NotImplementedException();
+        if (middlewaredict.ContainsKey(typeof(TMiddleware)))
+            return (TMiddleware)middlewaredict[typeof(TMiddleware)];
+        return default;
     }
 }
 
@@ -47,17 +58,29 @@ public class BaseMiddleware<TPackage>
 
     public virtual ValueTask Register(ISession<TPackage> session)
     {
-        throw new NotImplementedException();
+#if NET
+        return ValueTask.CompletedTask;
+#else
+            return new ValueTask();
+#endif
     }
 
     public virtual ValueTask UnRegister(ISession<TPackage> session)
     {
-        throw new NotImplementedException();
+#if NET
+        return ValueTask.CompletedTask;
+#else
+            return new ValueTask();
+#endif
     }
 
     public virtual ValueTask Handle(ISession<TPackage> session, TPackage package)
     {
-        throw new NotImplementedException();
+#if NET
+        return ValueTask.CompletedTask;
+#else
+            return new ValueTask();
+#endif
     }
 }
 
@@ -75,7 +98,7 @@ public class ReconnectorMiddleware<TPackage> : BaseMiddleware<TPackage>, IReconn
 {
     public ReconnectorMiddleware(IContainer container)
     {
-        throw new NotImplementedException();
+        IsStop = false;
     }
 
 
@@ -83,7 +106,19 @@ public class ReconnectorMiddleware<TPackage> : BaseMiddleware<TPackage>, IReconn
 
     public ValueTask Reconnector(Func<ValueTask<bool>> reconector)
     {
-        throw new NotImplementedException();
+        if (!IsStop)
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await Task.Delay(3000);
+                    await reconector();
+                }
+                catch (Exception e)
+                {
+                }
+            });
+        return new ValueTask();
     }
 }
 
@@ -97,11 +132,12 @@ public class HandleMiddleware<TPackage> : BaseMiddleware<TPackage>, IHandleMiddl
 
     public HandleMiddleware(Action<ISession<TPackage>, TPackage> action)
     {
-        throw new NotImplementedException();
+        _handle = action;
     }
 
     public override ValueTask Handle(ISession<TPackage> session, TPackage package)
     {
-        throw new NotImplementedException();
+        _handle.Invoke(session, package);
+        return new ValueTask();
     }
 }

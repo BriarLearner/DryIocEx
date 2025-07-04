@@ -5,12 +5,16 @@ using DryIocEx.Core.Extensions;
 using DryIocEx.Core.IOC;
 
 namespace DryIocEx.Core.Log;
-
+/// <summary>
+/// 日志访问器
+/// </summary>
 public interface ILoggerAccessor
 {
     ILogger Logger { get; }
 }
-
+/// <summary>
+/// 日志定位器
+/// </summary>
 public static class LogLocator
 {
     private static ILogManager _manager;

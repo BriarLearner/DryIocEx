@@ -15,7 +15,9 @@ public interface IAdapterManager
     TAdapter GetAdapter<TAdapter>() where TAdapter : IAdapter;
     void RegisterAdapter(Type type);
 }
-
+/// <summary>
+/// 适配器管理器
+/// </summary>
 public class AdapterManager : IAdapterManager
 {
     private readonly Dictionary<Type, AdapterInfo> _adapterDict = new();

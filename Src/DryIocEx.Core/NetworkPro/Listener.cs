@@ -60,49 +60,136 @@ public class Listener<TPackage> : IListener<TPackage>
 
     public Listener(IContainer container)
     {
-        throw new NotImplementedException();
+        _container = container;
+        _option = container.Resolve<IListenOption>().As<ListenOption>();
+        _logManager = container.Resolve<ILogManager>();
     }
 
     public event IListener<TPackage>.NewSessionHandle EventNewSession;
 
     public ValueTask<bool> StartAsync()
     {
-        throw new NotImplementedException();
+        if (_isStart) return new ValueTask<bool>(true);
+        try
+        {
+            var option = _option;
+            if (!ValidOption(option))
+                throw new ArgumentException(nameof(option));
+            var listenaddress = GetEndPoint(option.Ip, option.Port);
+            if (listenaddress == null) throw new ArgumentException(nameof(listenaddress));
+            var listensocket = _listenSocket =
+                new Socket(listenaddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            //SocketType https://learn.microsoft.com/zh-cn/dotnet/api/system.net.sockets.sockettype?devlangs=csharp&f1url=%3FappId%3DDev16IDEF1%26l%3DZH-CN%26k%3Dk(System.Net.Sockets.SocketType)%3Bk(DevLang-csharp)%26rd%3Dtrue&view=net-7.0
+            //ProtocolType https://learn.microsoft.com/zh-cn/dotnet/api/system.net.sockets.protocoltype?devlangs=csharp&f1url=%3FappId%3DDev16IDEF1%26l%3DZH-CN%26k%3Dk(System.Net.Sockets.ProtocolType)%3Bk(DevLang-csharp)%26rd%3Dtrue&view=net-7.0
+            listensocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
+            //SocketOptionLevel https://learn.microsoft.com/zh-cn/dotnet/api/system.net.sockets.socketoptionlevel?devlangs=csharp&f1url=%3FappId%3DDev16IDEF1%26l%3DZH-CN%26k%3Dk(System.Net.Sockets.SocketOptionLevel)%3Bk(DevLang-csharp)%26rd%3Dtrue&view=net-7.0
+            listensocket.LingerState = new LingerOption(false, 0);
+            if (option.NoDelay) listensocket.NoDelay = true;
+            listensocket.Bind(listenaddress);
+            listensocket.Listen(option.BackLog);
+            _ctsKeepAccept = new CancellationTokenSource();
+            KeepAccept(listensocket).DoNotAwait();
+        }
+        catch (Exception e)
+        {
+            _logManager.BroadcastLog(e.ToLogInfo("listener start error"));
+            return new ValueTask<bool>(false);
+        }
+
+        _isStart = true;
+        return new ValueTask<bool>(true);
     }
 
     public ValueTask StopAsync()
     {
-        throw new NotImplementedException();
+        if (!_isStart) return new ValueTask();
+        var socket = _listenSocket;
+        if (socket == null) return new ValueTask();
+        _ctsKeepAccept.Cancel();
+        socket.Close();
+        socket.Dispose();
+        _listenSocket = null;
+        _ctsKeepAccept = null;
+        _isStart = false;
+        return new ValueTask();
     }
 
     protected bool ValidOption(ListenOption option)
     {
-        throw new NotImplementedException();
+        if (option == null || string.IsNullOrEmpty(option.Ip) || option.Port < 0 || option.Port > 65535)
+            return false;
+        return true;
     }
 
     protected IPEndPoint GetEndPoint(string ip, int port)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(ip) || port == 0) return null;
+        IPAddress ipaddress;
+        if ("any".Equals(ip, StringComparison.OrdinalIgnoreCase))
+            ipaddress = IPAddress.Any;
+        else if ("IpV6Any".Equals(ip, StringComparison.OrdinalIgnoreCase))
+            ipaddress = IPAddress.IPv6Any;
+        else
+            ipaddress = IPAddress.Parse(ip);
+        return new IPEndPoint(ipaddress, port);
     }
 
     public async ValueTask KeepAccept(Socket socket)
     {
-        throw new NotImplementedException();
+        while (!_ctsKeepAccept.IsCancellationRequested)
+            try
+            {
+                var client = await socket.AcceptAsync().ConfigureAwait(false);
+                var session = Create(client);
+                OnNewSession(session).DoNotAwait();
+            }
+            catch (Exception e)
+            {
+                if (e is ObjectDisposedException || e is NullReferenceException) break;
+
+                if (e is SocketException se)
+                {
+                    var errorcode = se.ErrorCode;
+                    //ListenSocket 被关闭了
+                    if (errorcode == 125 ||
+                        errorcode == 89 ||
+                        errorcode == 995 ||
+                        errorcode == 10004 ||
+                        errorcode == 10038)
+                        break;
+                }
+            }
     }
 
     private async ValueTask OnNewSession(ISession<TPackage> session)
     {
-        throw new NotImplementedException();
+        if (EventNewSession != null && session != null)
+            try
+            {
+                await EventNewSession(session);
+            }
+            catch (Exception e)
+            {
+                _logManager.BroadcastLog(e.ToLogInfo("Listen onnewsession error"));
+            }
     }
 
     private object GetSessionKey(Socket socket)
     {
-        throw new NotImplementedException();
+        switch (_option.SessionKey)
+        {
+            case EnumSessionKey.LocalEndPoint:
+                return socket.LocalEndPoint;
+            case EnumSessionKey.RemoteEndPoint:
+                return socket.RemoteEndPoint;
+            default:
+                return Guid.NewGuid();
+        }
     }
 
     private ISession<TPackage> Create(Socket socket)
     {
-        throw new NotImplementedException();
+        return new Session<TPackage>(new TcpChannel<TPackage>(_container, socket), GetSessionKey(socket));
     }
 }
 
@@ -119,48 +206,170 @@ public class UdpListener<TPackage> : IListener<TPackage>
 
     public UdpListener(IContainer container)
     {
-        throw new NotImplementedException();
+        _container = container;
+        _sessions = container.Resolve<IServer<TPackage>>().Sessions;
+        _option = container.Resolve<IListenOption>().As<ListenOption>();
+        _logManager = container.Resolve<ILogManager>();
     }
 
     public event IListener<TPackage>.NewSessionHandle EventNewSession;
 
     public ValueTask<bool> StartAsync()
     {
-        throw new NotImplementedException();
+        if (_isStart) return new ValueTask<bool>(true);
+        try
+        {
+            var option = _option;
+            if (!ValidOption(option))
+                throw new ArgumentException(nameof(option));
+            var listenaddress = GetEndPoint(option.Ip, option.Port);
+            if (listenaddress == null) throw new ArgumentException(nameof(listenaddress));
+            var listensocket = _listenSocket =
+                new Socket(listenaddress.AddressFamily, SocketType.Stream, ProtocolType.Udp);
+            //SocketType https://learn.microsoft.com/zh-cn/dotnet/api/system.net.sockets.sockettype?devlangs=csharp&f1url=%3FappId%3DDev16IDEF1%26l%3DZH-CN%26k%3Dk(System.Net.Sockets.SocketType)%3Bk(DevLang-csharp)%26rd%3Dtrue&view=net-7.0
+            //ProtocolType https://learn.microsoft.com/zh-cn/dotnet/api/system.net.sockets.protocoltype?devlangs=csharp&f1url=%3FappId%3DDev16IDEF1%26l%3DZH-CN%26k%3Dk(System.Net.Sockets.ProtocolType)%3Bk(DevLang-csharp)%26rd%3Dtrue&view=net-7.0
+            if (option.NoDelay)
+                listensocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.NoDelay, true);
+
+            //_acceptRemoteEndPoint = listenaddress.AddressFamily == AddressFamily.InterNetworkV6
+            //    ? new IPEndPoint(IPAddress.IPv6Any, 0)
+            //    : new IPEndPoint(IPAddress.Any, 0);
+            var IOC_IN = 0x80000000;
+            uint IOC_VENDOR = 0x18000000;
+            var SIO_UDP_CONNRESET = IOC_IN | IOC_VENDOR | 12;
+
+            byte[] optionInValue = { Convert.ToByte(false) };
+            var optionOutValue = new byte[4];
+            listensocket.IOControl((int)SIO_UDP_CONNRESET, optionInValue, optionOutValue);
+            listensocket.Bind(listenaddress);
+            _ctsKeepAccept = new CancellationTokenSource();
+            KeepAccept(listensocket).DoNotAwait();
+        }
+        catch (Exception e)
+        {
+            _logManager.BroadcastLog(e.ToLogInfo("listener start error"));
+            return new ValueTask<bool>(false);
+        }
+
+        _isStart = true;
+        return new ValueTask<bool>(true);
     }
 
     public ValueTask StopAsync()
     {
-        throw new NotImplementedException();
+        if (!_isStart) return new ValueTask();
+        var socket = _listenSocket;
+        if (socket == null) return new ValueTask();
+        _ctsKeepAccept.Cancel();
+        socket.Close();
+        socket.Dispose();
+        _listenSocket = null;
+        _ctsKeepAccept = null;
+        _isStart = false;
+        return new ValueTask();
     }
 
     protected bool ValidOption(ListenOption option)
     {
-        throw new NotImplementedException();
+        if (option == null || string.IsNullOrEmpty(option.Ip) || option.Port < 0 || option.Port > 65535)
+            return false;
+        return true;
     }
 
     protected IPEndPoint GetEndPoint(string ip, int port)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(ip) || port == 0) return null;
+        IPAddress ipaddress;
+        if ("any".Equals(ip, StringComparison.OrdinalIgnoreCase))
+            ipaddress = IPAddress.Any;
+        else if ("IpV6Any".Equals(ip, StringComparison.OrdinalIgnoreCase))
+            ipaddress = IPAddress.IPv6Any;
+        else
+            ipaddress = IPAddress.Parse(ip);
+        return new IPEndPoint(ipaddress, port);
     }
 
     public async ValueTask KeepAccept(Socket socket)
     {
-        throw new NotImplementedException();
+        var acceptendpoint = socket.AddressFamily == AddressFamily.InterNetworkV6
+            ? new IPEndPoint(IPAddress.IPv6Any, 0)
+            : new IPEndPoint(IPAddress.Any, 0);
+
+        while (!_ctsKeepAccept.IsCancellationRequested)
+        {
+            var buffer = default(byte[]);
+            try
+            {
+                buffer = ArrayPool<byte>.Shared.Rent(4 * 1024);
+
+                var result = await socket.ReceiveFromAsync(new ArraySegment<byte>(buffer, 0, buffer.Length),
+                    SocketFlags.None, acceptendpoint).ConfigureAwait(false);
+                var packagedata = new ArraySegment<byte>(buffer, 0, result.ReceivedBytes);
+
+
+                var key = GetSessionKey(result.RemoteEndPoint);
+                var selectchannel =
+                    (UdpServerChannel<TPackage>)_sessions.FirstOrDefault(s => s.GetKey<object>().Equals(key))
+                        ?.Channel;
+                if (selectchannel == null)
+                {
+                    var session = Create(socket, (IPEndPoint)result.RemoteEndPoint, key);
+                    await OnNewSession(session);
+                    selectchannel = (UdpServerChannel<TPackage>)session.Channel;
+                }
+
+                await selectchannel.WriteReceiveDataAsync(packagedata.AsMemory(), _ctsKeepAccept.Token);
+            }
+            catch (Exception e)
+            {
+                if (e is ObjectDisposedException || e is NullReferenceException) break;
+
+                if (e is SocketException se)
+                {
+                    var errorcode = se.ErrorCode;
+                    //ListenSocket 被关闭了
+                    if (errorcode == 125 ||
+                        errorcode == 89 ||
+                        errorcode == 995 ||
+                        errorcode == 10004 ||
+                        errorcode == 10038)
+                        break;
+                }
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return(buffer);
+            }
+        }
     }
 
     private async ValueTask OnNewSession(ISession<TPackage> session)
     {
-        throw new NotImplementedException();
+        if (EventNewSession != null && session != null)
+            try
+            {
+                await EventNewSession(session);
+            }
+            catch (Exception e)
+            {
+                _logManager.BroadcastLog(e.ToLogInfo("Listen onnewsession error"));
+            }
     }
 
     private object GetSessionKey(EndPoint endpoint)
     {
-        throw new NotImplementedException();
+        switch (_option.SessionKey)
+        {
+            case EnumSessionKey.LocalEndPoint:
+            case EnumSessionKey.RemoteEndPoint:
+                return endpoint;
+            default:
+                return Guid.NewGuid();
+        }
     }
 
     private ISession<TPackage> Create(Socket socket, IPEndPoint ipendpoint, object key)
     {
-        throw new NotImplementedException();
+        return new Session<TPackage>(new UdpServerChannel<TPackage>(_container, socket, ipendpoint), key);
     }
 }

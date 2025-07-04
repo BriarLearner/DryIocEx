@@ -50,12 +50,16 @@ public interface IContainer
     /// <returns></returns>
     bool HasRegister(KeyInfo info);
 }
-
+/// <summary>
+/// 注入特性
+/// </summary>
 [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Interface | AttributeTargets.Field)]
 public class RegisterAttribute : Attribute
 {
 }
-
+/// <summary>
+/// 自动注入特性
+/// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 public class AutoRegisterAttribute : Attribute
 {
@@ -69,7 +73,9 @@ public class AutoRegisterAttribute : Attribute
 
     public EnumLifetime Lifetime { get; }
 }
-
+/// <summary>
+/// 容器定位器
+/// </summary>
 public static class ContainerLocator
 {
     private static IContainer _container;
@@ -80,7 +86,9 @@ public static class ContainerLocator
         throw new NotImplementedException();
     }
 }
-
+/// <summary>
+/// 容器扩展
+/// </summary>
 public static class ContainerExtension
 {
     /// <summary>

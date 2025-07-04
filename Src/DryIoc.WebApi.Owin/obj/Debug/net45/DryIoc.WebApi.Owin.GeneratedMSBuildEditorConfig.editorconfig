@@ -1,5 +1,0 @@
-is_global = true
-build_property.RootNamespace = DryIoc.WebApi.Owin
-build_property.ProjectDir = C:\Users\Dujinfeng\Documents\GitHub\DryIocEx\Src\DryIoc.WebApi.Owin\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
