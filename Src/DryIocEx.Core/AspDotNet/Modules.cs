@@ -16,7 +16,20 @@ public static class ModuleInitializerExtensions
     public static IServiceCollection RunModuleInitializers(this IServiceCollection services,
         IEnumerable<Assembly> assemblies)
     {
-        throw new NotImplementedException();
+        foreach (var asm in assemblies)
+        {
+            var types = asm.GetTypes();
+            var moduleInitializerTypes =
+                types.Where(t => !t.IsAbstract && typeof(IModuleInitializer).IsAssignableFrom(t));
+            foreach (var implType in moduleInitializerTypes)
+            {
+                var initializer = (IModuleInitializer?)Activator.CreateInstance(implType);
+                if (initializer == null) throw new ApplicationException($"Cannot create ${implType}");
+                initializer.Initialize(services);
+            }
+        }
+
+        return services;
     }
 }
 

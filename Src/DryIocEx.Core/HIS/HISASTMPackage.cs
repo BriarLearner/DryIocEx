@@ -75,22 +75,7 @@ public class ASTMConst
     /// <summary>
     ///     【|】
     /// </summary>
-    public const byte charField = (byte)'|';
-
-    /// <summary>
-    ///     【^】
-    /// </summary>
-    public const byte charComponent = (byte)'^';
-
-    /// <summary>
-    ///     【\】
-    /// </summary>
-    public const byte charRepeating = (byte)'\\';
-
-    /// <summary>
-    ///     【&】
-    /// </summary>
-    public const byte charEscape = (byte)'&';
+    public const byte FIELD = (byte)'|';
 
     #endregion
 }
@@ -230,7 +215,7 @@ public class HISASTMPackageFilter : IPackageFilter<HISASTMPackage>
 {
     public HISASTMPackage Filter(ref SequenceReader<byte> reader)
     {
-        //1.检测第一个字节是否是 识别的字节
+        //1.检测第一个字节是否是识别的字节
         var type = GetType(reader);
         //2.不是过滤掉
         if (type == EnumASTMPackageType.Unknown) //过滤掉未知数据
@@ -303,12 +288,12 @@ public class HISASTMPackageFilter : IPackageFilter<HISASTMPackage>
                 list.Add(ASTMConst.STX);
                 list.Add((byte)(pack.FrameIndex % 8).ToString("D1").First());
                 list.Add((byte)pack.Identify.ToUpper().First());
-                list.Add(ASTMConst.charField);
+                list.Add(ASTMConst.FIELD);
                 list.Add((byte)pack.PackageIndex.ToString("D1").First());
 
                 if (pack.Fields.Any())
                 {
-                    list.Add(ASTMConst.charField);
+                    list.Add(ASTMConst.FIELD);
                     list.AddRange(Encoding.UTF8.GetBytes(string.Join("|", pack.Fields)));
                 }
 

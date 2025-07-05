@@ -65,7 +65,9 @@ public class AutoRegisterAttribute : Attribute
 {
     public AutoRegisterAttribute(Type fromType, EnumLifetime lifetime, string name = "")
     {
-        throw new NotImplementedException();
+        FromType = fromType;
+        Lifetime = lifetime;
+        Name = name;
     }
 
     public string Name { get; }
@@ -83,7 +85,7 @@ public static class ContainerLocator
 
     public static void SetContainer(IContainer container)
     {
-        throw new NotImplementedException();
+        _container = container;
     }
 }
 /// <summary>
@@ -112,7 +114,8 @@ public static class ContainerExtension
     /// <returns></returns>
     public static T Get<T>(this object obj, string name = "")
     {
-        throw new NotImplementedException();
+        if (obj is IContainer container) return container.Resolve<T>(name);
+        return ContainerLocator.Container.Resolve<T>(name);
     }
 
     /// <summary>
@@ -124,7 +127,8 @@ public static class ContainerExtension
     /// <returns></returns>
     public static bool HasRegister(this IContainer container, Type from, string name = "")
     {
-        throw new NotImplementedException();
+        var key = from.ToKeyInfo(name);
+        return container.HasRegister(key);
     }
 
     /// <summary>
@@ -136,7 +140,7 @@ public static class ContainerExtension
     /// <returns></returns>
     public static bool HasRegister<TFrom>(this IContainer container, string name = "")
     {
-        throw new NotImplementedException();
+        return container.HasRegister(typeof(TFrom), name);
     }
 
     /// <summary>
@@ -151,12 +155,13 @@ public static class ContainerExtension
     public static IContainer TryRegister(this IContainer container, Type from, Type to, EnumLifetime lifetime,
         string name = "")
     {
-        throw new NotImplementedException();
+        if (!container.HasRegister(from, name)) container.Register(from, to, lifetime, name);
+        return container;
     }
 
     public static IContainer TryRegister<TFrom, TTo>(this IContainer container, EnumLifetime lifetime, string name = "")
     {
-        throw new NotImplementedException();
+        return container.TryRegister(typeof(TFrom), typeof(TTo), lifetime, name);
     }
 
 
@@ -187,7 +192,7 @@ public static class ContainerExtension
     public static IContainer Register<TFrom, TTo>(this IContainer container, EnumLifetime lifetime,
         string name = "")
     {
-        throw new NotImplementedException();
+        return container.Register(typeof(TFrom), typeof(TTo), lifetime, name);
     }
 
     /// <summary>
@@ -214,7 +219,7 @@ public static class ContainerExtension
     /// <returns></returns>
     public static IContainer Register<TFromTo>(this IContainer container, EnumLifetime lifetime, string name = "")
     {
-        throw new NotImplementedException();
+        return container.Register(typeof(TFromTo), lifetime, name);
     }
 
 
@@ -241,7 +246,7 @@ public static class ContainerExtension
     /// <returns></returns>
     public static IContainer Register<TFrom>(this IContainer container, TFrom instance, string name = "")
     {
-        throw new NotImplementedException();
+        return Register(container, typeof(TFrom), instance, name);
     }
 
     /// <summary>
@@ -256,14 +261,16 @@ public static class ContainerExtension
     public static IContainer Register(this IContainer container, Type fromtype, Func<IContainer, object> factory,
         EnumLifetime lifetime, string name = "")
     {
-        throw new NotImplementedException();
+        container.Register(new RegistryInfo(fromtype.ToKeyInfo(name), lifetime, (_, genericargs) => factory(_)));
+        return container;
     }
 
 
     public static IContainer Register<TFrom>(this IContainer container, Func<IContainer, TFrom> factory,
         EnumLifetime lifetime, string name = "")
     {
-        throw new NotImplementedException();
+        container.Register(new RegistryInfo(typeof(TFrom).ToKeyInfo(name), lifetime, (_, genericargs) => factory(_)));
+        return container;
     }
 
     /// <summary>
@@ -279,7 +286,7 @@ public static class ContainerExtension
 
     public static IContainer CreateChild(this IContainer container)
     {
-        throw new NotImplementedException();
+        return new Container(container);
     }
 
     /// <summary>
@@ -297,16 +304,16 @@ public static class ContainerExtension
 
     public static object Resolve(this IContainer container, Type TFrom, string name = "")
     {
-        throw new NotImplementedException();
+        return container.Resolve(TFrom.ToKeyInfo(name));
     }
 
     public static TFrom Resolve<TFrom>(this IContainer container, string name = "")
     {
-        throw new NotImplementedException();
+        return (TFrom)container.Resolve(typeof(TFrom).ToKeyInfo(name));
     }
 
     public static IEnumerable<TFrom> Resolves<TFrom>(this IContainer container, string name = "")
     {
-        throw new NotImplementedException();
+        return container.Resolve<IEnumerable<TFrom>>(name);
     }
 }

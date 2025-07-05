@@ -22,12 +22,14 @@ public class Container : IDisposable, IContainer
     /// <exception cref="NotImplementedException"></exception>
     public Container()
     {
-        throw new NotImplementedException();
+        Root = this;
+        Registries = new ConcurrentDictionary<KeyInfo, RegistryInfo>();
     }
 
     public Container(IContainer parent)
     {
-        throw new NotImplementedException();
+        Root = parent.Root;
+        Registries = parent.Registries;
     }
 
 
@@ -58,7 +60,8 @@ public class Container : IDisposable, IContainer
     /// <returns></returns>
     public bool HasRegister(KeyInfo info)
     {
-        throw new NotImplementedException();
+        NotDisposed();
+        return Registries.ContainsKey(info);
     }
 
 
@@ -69,7 +72,18 @@ public class Container : IDisposable, IContainer
     /// <returns></returns>
     public IContainer Register(RegistryInfo registry)
     {
-        throw new NotImplementedException();
+        NotDisposed();
+        if (Registries.TryGetValue(registry.KeyInfo, out var exist))
+        {
+            Registries[registry.KeyInfo] = registry;
+            registry.Next = exist;
+        }
+        else
+        {
+            Registries[registry.KeyInfo] = registry;
+        }
+
+        return this;
     }
 
     /// <summary>
@@ -133,7 +147,7 @@ public class ContainerBuilder : BaseBuilder<ContainerBuilder, IContainer>
     /// <exception cref="NotImplementedException"></exception>
     public ContainerBuilder(IContainer container)
     {
-        throw new NotImplementedException();
+        _container = container;
     }
 
     public override IContainer Build()
@@ -143,6 +157,7 @@ public class ContainerBuilder : BaseBuilder<ContainerBuilder, IContainer>
 
     public ContainerBuilder Register(Assembly assembly)
     {
-        throw new NotImplementedException();
+        _container.Register(assembly);
+        return this;
     }
 }

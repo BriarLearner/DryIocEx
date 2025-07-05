@@ -10,17 +10,17 @@ internal static class IOCInfoExtension
 {
     public static KeyInfo ToKeyInfo(this Type type)
     {
-        throw new NotImplementedException();
+        return ToKeyInfo(type, string.Empty);
     }
 
     public static KeyInfo ToKeyInfo(this Type type, string name)
     {
-        throw new NotImplementedException();
+        return new KeyInfo(type, name);
     }
 
     public static InstanceKey ToInstanceKey(this RegistryInfo registry, Type[] genericargs)
     {
-        throw new NotImplementedException();
+        return new InstanceKey(registry, genericargs);
     }
 }
 
@@ -39,7 +39,9 @@ public class RegistryInfo
 {
     public RegistryInfo(KeyInfo keyinfo, EnumLifetime lifetime, Func<IContainer, Type[], object> factory)
     {
-        throw new NotImplementedException();
+        KeyInfo = keyinfo;
+        Lifetime = lifetime;
+        Factory = factory;
     }
 
     public KeyInfo KeyInfo { get; set; }
@@ -56,7 +58,7 @@ public class RegistryInfo
 
     public IEnumerable<RegistryInfo> AsEnumerable()
     {
-        throw new NotImplementedException();
+        for (var self = this; self != null; self = self.Next) yield return self;
     }
 }
 
@@ -73,7 +75,8 @@ public class KeyInfo : IEquatable<KeyInfo>
     /// <param name="name"></param>
     public KeyInfo(Type fromType, string name)
     {
-        throw new NotImplementedException();
+        Name = name;
+        FromType = fromType;
     }
 
     public string Name { set; get; }
@@ -82,27 +85,35 @@ public class KeyInfo : IEquatable<KeyInfo>
 
     public bool Equals(KeyInfo other)
     {
-        throw new NotImplementedException();
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Name == other.Name && Equals(FromType, other.FromType);
     }
 
     public override bool Equals(object obj)
     {
-        throw new NotImplementedException();
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != GetType()) return false;
+        return Equals((KeyInfo)obj);
     }
 
     public override int GetHashCode()
     {
-        throw new NotImplementedException();
+        unchecked
+        {
+            return ((Name != null ? Name.GetHashCode() : 0) * 397) ^ (FromType != null ? FromType.GetHashCode() : 0);
+        }
     }
 
     public static bool operator ==(KeyInfo left, KeyInfo right)
     {
-        throw new NotImplementedException();
+        return Equals(left, right);
     }
 
     public static bool operator !=(KeyInfo left, KeyInfo right)
     {
-        throw new NotImplementedException();
+        return !Equals(left, right);
     }
 }
 
@@ -110,7 +121,8 @@ public class InstanceKey : IEquatable<InstanceKey>
 {
     public InstanceKey(RegistryInfo registryInfo, Type[] genericArgs)
     {
-        throw new NotImplementedException();
+        GenericArgs = genericArgs;
+        RegistryInfo = registryInfo;
     }
 
     public Type[] GenericArgs { set; get; }
@@ -118,26 +130,37 @@ public class InstanceKey : IEquatable<InstanceKey>
 
     public bool Equals(InstanceKey other)
     {
-        throw new NotImplementedException();
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        if (RegistryInfo != other.RegistryInfo) return false;
+        if (GenericArgs.Length != other.GenericArgs.Length) return false;
+        for (var i = 0; i < GenericArgs.Length; i++)
+            if (GenericArgs[i] != other.GenericArgs[i])
+                return false;
+        return true;
     }
 
     public override bool Equals(object obj)
     {
-        throw new NotImplementedException();
+        if (ReferenceEquals(null, obj)) return false;
+        if (ReferenceEquals(this, obj)) return true;
+        if (obj.GetType() != GetType()) return false;
+        return Equals((InstanceKey)obj);
     }
 
     public override int GetHashCode()
     {
-        throw new NotImplementedException();
+        var hashCode = RegistryInfo.GetHashCode();
+        return GenericArgs.Aggregate(hashCode, (current, t) => current ^ t.GetHashCode());
     }
 
     public static bool operator ==(InstanceKey left, InstanceKey right)
     {
-        throw new NotImplementedException();
+        return Equals(left, right);
     }
 
     public static bool operator !=(InstanceKey left, InstanceKey right)
     {
-        throw new NotImplementedException();
+        return !Equals(left, right);
     }
 }
