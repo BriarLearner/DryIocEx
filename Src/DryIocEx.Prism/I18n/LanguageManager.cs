@@ -16,10 +16,7 @@ public class LanguageManager : ILanguageManager
         get => CultureInfo.DefaultThreadCurrentUICulture;
         set
         {
-            if (EqualityComparer<CultureInfo>.Default.Equals(value, CultureInfo.DefaultThreadCurrentUICulture)) return;
-            CultureInfo.DefaultThreadCurrentUICulture = value;
-            CultureInfo.DefaultThreadCurrentCulture = value;
-            OnCurrentUICultureChanged();
+            throw new NotImplementedException();
         }
     }
 
@@ -28,46 +25,26 @@ public class LanguageManager : ILanguageManager
 
     public void Register(ResourceManager manager)
     {
-        if (_storage.ContainsKey(manager.BaseName)) return;
-        _storage[manager.BaseName] = manager;
+       throw new NotImplementedException();
     }
 
     public object Get(ComponentResourceKey key)
     {
-        return GetCurrentResurceManager(key.TypeInTargetAssembly.FullName)
-                ?.GetObject(key.ResourceId.ToString(), CurrentCultureInfo) ?? $"Miss_{key}";
+        throw new NotImplementedException();
     }
 
     public string Get(string key)
     {
-        if (string.IsNullOrEmpty(key)) return "Miss";
-        var result = string.Empty;
-        var success = false;
-        foreach (var resourceManager in _storage.Values)
-        {
-            try
-            {
-                result = resourceManager.GetString(key, CurrentCultureInfo);
-                if (!string.IsNullOrEmpty(result)) success = true;
-            }
-            catch (Exception e)
-            {
-                continue;
-            }
-
-            if (success) break;
-        }
-
-        return success ? result : key;
+        throw new NotImplementedException();
     }
 
     private void OnCurrentUICultureChanged()
     {
-        CurrentCultureInfoChanged?.Invoke();
+        throw new NotImplementedException();
     }
 
     private ResourceManager GetCurrentResurceManager(string key)
     {
-        return _storage.TryGetValue(key, out var value) ? value : null;
+        throw new NotImplementedException();
     }
 }

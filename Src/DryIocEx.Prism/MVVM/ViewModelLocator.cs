@@ -11,7 +11,7 @@ public static class ViewModelLocator
     private static void OnAutoWireViewModelChanged(DependencyObject dependencyobject,
         DependencyPropertyChangedEventArgs e)
     {
-        if ((bool)e.NewValue && dependencyobject is FrameworkElement fe) ViewModelFactory.WireViewModel(fe, Bind);
+        throw new NotImplementedException();
     }
 
     /// <summary>

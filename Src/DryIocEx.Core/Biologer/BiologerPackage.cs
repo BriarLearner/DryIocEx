@@ -176,73 +176,29 @@ public class BiologerServer : IBiologerServer
     public event Action<IPEndPoint, bool> ConnectState;
     public void ReceiveConnect(ISession<BiologerPackage> session)
     {
-        var ipendpoint = session.GetKey<IPEndPoint>();
-
-        _sessionDict[ipendpoint] = session;
-        ConnectState?.Invoke(ipendpoint, true);
+        throw new NotImplementedException();
     }
     private ConcurrentDictionary<IPEndPoint, ISession<BiologerPackage>> _sessionDict =
         new ConcurrentDictionary<IPEndPoint, ISession<BiologerPackage>>();
     public void DisConnect(ISession<BiologerPackage> session)
     {
-        var endpoint = session.GetKey<IPEndPoint>();
-        if (endpoint != null)
-        {
-            ConnectState?.Invoke(endpoint, false);
-            _sessionDict.TryRemove(endpoint, out var temvalue);
-        }
+        throw new NotImplementedException();
     }
     public SessionOption GetSessionOption(IPEndPoint endpoint)
     {
-        if (_sessionDict.ContainsKey(endpoint)) return _sessionDict[endpoint].GetOption<SessionOption>();
-
-        return null;
+        throw new NotImplementedException();
     }
    
 
 
     public void ReceivePackageCore(ISession<BiologerPackage> session, BiologerPackage package)
     {
-        try
-        {
-            var ipendpoint = session.GetKey<IPEndPoint>();
-            if (package.ID != 9999 && package.ID != 8888)
-            {
-                var ack = BiologerPackageStore.CreateAck(package.ID, package.PFC);
-                session.SendAsync(ack);
-            }
-
-            if (package.ID == 8888)
-            {
-                var pfc = package.PFC;
-                var ai = package.AI;
-                if (WaitACKDict.ContainsKey(ipendpoint) && WaitACKDict[ipendpoint].ContainsKey((ai, pfc)))
-                {
-                    WaitACKDict[ipendpoint][(ai, pfc)].TrySetResult(1);
-                }
-            }
-            ReceivePackage?.Invoke(ipendpoint, package);
-        }
-        catch (Exception e)
-        {
-            //session.Container.LogError(e.Format());
-        }
+        throw new NotImplementedException();
     }
 
     public async Task<EnumSendResult> SendPackage(IPEndPoint endpoint, BiologerPackage package)
     {
-        if (!_sessionDict.ContainsKey(endpoint))
-        {
-            return EnumSendResult.NotFind;
-        }
-
-        if (package == null || package.Length < 16) return EnumSendResult.PackageError;
-       
-        var sendinfo = new SendBiologerInfo(package);
-        SendQueue[endpoint].Enqueue(sendinfo);
-        InnerStartSend(endpoint);
-        await sendinfo.WaitTask.Task;
-        return sendinfo.Result;
+        throw new NotImplementedException();
     }
 
     public SGSpinLock _sendQueueLock = new SGSpinLock();

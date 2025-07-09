@@ -72,18 +72,7 @@ public class Container : IDisposable, IContainer
     /// <returns></returns>
     public IContainer Register(RegistryInfo registry)
     {
-        NotDisposed();
-        if (Registries.TryGetValue(registry.KeyInfo, out var exist))
-        {
-            Registries[registry.KeyInfo] = registry;
-            registry.Next = exist;
-        }
-        else
-        {
-            Registries[registry.KeyInfo] = registry;
-        }
-
-        return this;
+        throw new NotImplementedException();
     }
 
     /// <summary>

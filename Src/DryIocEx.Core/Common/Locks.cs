@@ -10,31 +10,27 @@ public class SGLock : IDisposable
 
     public void Dispose()
     {
-        Dispose(true);
-        GC.SuppressFinalize(this);
+        throw new NotImplementedException();
     }
 
     private void Dispose(bool disposing)
     {
-        _waiterLock?.Dispose();
-        _waiterLock = null;
+        throw new NotImplementedException();
     }
 
     ~SGLock()
     {
-        Dispose(false);
+        throw new NotImplementedException();
     }
 
     public void Enter()
     {
-        if (Interlocked.Increment(ref _waiters) == 1) return;
-        _waiterLock.WaitOne();
+        throw new NotImplementedException();
     }
 
     public void Leave()
     {
-        if (Interlocked.Decrement(ref _waiters) == 0) return;
-        _waiterLock.Set();
+       throw new NotImplementedException();
     }
 }
 
@@ -50,27 +46,17 @@ public class SGSpinLock
 
     public void Enter()
     {
-        if (Interlocked.CompareExchange(ref _waiters, 1, 0) == 0) return;
-        var spinwait = new SpinWait();
-        for (var spinCount = 0; spinCount < _spinCount; spinCount++)
-        {
-            if (Interlocked.CompareExchange(ref _waiters, 1, 0) == 0) return;
-            spinwait.SpinOnce();
-        }
-
-        if (Interlocked.Increment(ref _waiters) > 1) _waiterLock.WaitOne();
+        throw new NotImplementedException();
     }
 
     public void Leave()
     {
-        if (Interlocked.Decrement(ref _waiters) == 0) return;
-        _waiterLock.Set();
+        throw new NotImplementedException();
     }
 
     public void Dispose()
     {
-        _waiterLock?.Dispose();
-        _waiterLock = default;
+        throw new NotImplementedException();
     }
 }
 
@@ -83,37 +69,12 @@ public class SGSpinRecursionLock
 
     public void Enter()
     {
-        var threadId = Thread.CurrentThread.ManagedThreadId;
-        if (threadId == _owningThreadId)
-        {
-            _recursion++;
-            return;
-        }
-
-        if (Interlocked.CompareExchange(ref _waiters, 1, 0) == 0) goto GotLock;
-        var spinwait = new SpinWait();
-        for (var spinCount = 0; spinCount < _spincount; spinCount++)
-        {
-            if (Interlocked.CompareExchange(ref _waiters, 1, 0) == 0) goto GotLock;
-            spinwait.SpinOnce();
-        }
-
-        if (Interlocked.Increment(ref _waiters) > 1) _waiterLock.WaitOne();
-        GotLock:
-        _owningThreadId = threadId;
-        _recursion = 1;
+        throw new NotImplementedException();
     }
 
     public void Leave()
     {
-        var threadId = Thread.CurrentThread.ManagedThreadId;
-        if (threadId != _owningThreadId)
-            throw new SynchronizationLockException("SpinRecursionHybridLock not owned by calling thread");
-        if (--_recursion > 0) return;
-        _owningThreadId = 0;
-        if (Interlocked.Decrement(ref _waiters) == 0)
-            return;
-        _waiterLock.Set();
+        throw new NotImplementedException();
     }
 
     public void Dispose()

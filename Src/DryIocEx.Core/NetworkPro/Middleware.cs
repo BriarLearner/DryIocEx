@@ -106,19 +106,7 @@ public class ReconnectorMiddleware<TPackage> : BaseMiddleware<TPackage>, IReconn
 
     public ValueTask Reconnector(Func<ValueTask<bool>> reconector)
     {
-        if (!IsStop)
-            Task.Run(async () =>
-            {
-                try
-                {
-                    await Task.Delay(3000);
-                    await reconector();
-                }
-                catch (Exception e)
-                {
-                }
-            });
-        return new ValueTask();
+        throw new NotImplementedException();
     }
 }
 

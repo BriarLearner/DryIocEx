@@ -4,7 +4,6 @@
 		<TargetFrameworks>net8.0;net6.0;net48;net472;net471;netstandard2.0</TargetFrameworks>
 		<Copyright>Copyright © 2020-2024 DryIocEx All Rights Reserved.</Copyright>
 		<Description>DryIocExtension</Description>
-		<VersionPrefix>1.1.3</VersionPrefix>
 		<RootNamespace>DryIocEx.Core</RootNamespace>
 		<AssemblyName>DryIocEx.Core</AssemblyName>
 		<Title>DryIocEx.Core</Title>

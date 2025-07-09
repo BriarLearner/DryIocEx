@@ -44,11 +44,7 @@ public class Client<TPackage> : IClient<TPackage>
 
     public Client(IContainer container)
     {
-        Container = container;
-        MiddlewareManager = container.Resolve<IMiddlewareManager<TPackage>>();
-        _logManager = container.Resolve<ILogManager>();
-        var middlewares = container.Resolve<IEnumerable<IMiddleware<TPackage>>>();
-        if (middlewares != null && middlewares.Any()) MiddlewareManager.Register(middlewares);
+        throw new NotImplementedException();
     }
 
     public IMiddlewareManager<TPackage> MiddlewareManager { get; }
@@ -58,25 +54,12 @@ public class Client<TPackage> : IClient<TPackage>
 
     public ValueTask<bool> StartAsync()
     {
-        var middleware = MiddlewareManager.GetMiddleware<IReconnectorMiddleware<TPackage>>();
-        if (middleware != null) middleware.IsStop = false;
-
-        return InnerStartAsync();
+        throw new NotImplementedException();
     }
 
     public async ValueTask StopAsync()
     {
-        try
-        {
-            //主动关闭重连
-            var middleware = MiddlewareManager.GetMiddleware<IReconnectorMiddleware<TPackage>>();
-            if (middleware != null) middleware.IsStop = true;
-
-            await HandleStop();//这边是否需要触发
-        }
-        catch (Exception e)
-        {
-        }
+        throw new NotImplementedException();
     }
 
     public ValueTask SendAsync(byte[] buffer)
@@ -98,126 +81,38 @@ public class Client<TPackage> : IClient<TPackage>
 
     private async ValueTask OnMiddlewareHandle(ISession<TPackage> session, TPackage package)
     {
-        foreach (var middleware in MiddlewareManager.Middlewares)
-            try
-            {
-                await middleware.Handle(session, package);
-            }
-            catch (Exception e)
-            {
-            }
+        throw new NotImplementedException();
     }
 
     private async ValueTask OnMiddlewareRegister(ISession<TPackage> session)
     {
-        foreach (var middleware in MiddlewareManager.Middlewares)
-            try
-            {
-                await middleware.Register(session);
-            }
-            catch (Exception e)
-            {
-            }
+        throw new NotImplementedException();
     }
 
     private async ValueTask OnMiddlewareUnRegister(ISession<TPackage> session)
     {
-        foreach (var middleware in MiddlewareManager.Middlewares)
-            try
-            {
-                await middleware.UnRegister(session);
-            }
-            catch (Exception e)
-            {
-            }
+        throw new NotImplementedException();
     }
 
 
     private async ValueTask<bool> InnerStartAsync()
     {
-        if (State == EnumNetworkState.Start) return true;
-        var connector = Container.Resolve<IConnector<TPackage>>();
-        var session = _session = await connector.ConnectAsync();
-        if (session == null)
-        {
-            var middleware = MiddlewareManager.GetMiddleware<IReconnectorMiddleware<TPackage>>();
-            if (middleware != null)
-            {
-                await middleware.Reconnector(InnerStartAsync);
-                return true;
-            }
-
-            return false;
-        }
-        
-        session.SessionStop += OnSessionStop;
-        try
-        {
-            session.Start();
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-
-        State = EnumNetworkState.Start;
-        try
-        {
-            await OnMiddlewareRegister(session);
-            OnStateChanged(session, EnumNetworkState.Start);
-        }
-        catch (Exception e)
-        {
-        }
-
-        InnerHandlePackage(session);
-        return true;
+        throw new NotImplementedException();
     }
 
     private async ValueTask OnSessionStop(ISession<TPackage> session, StopReason reason)
     {
-        try
-        {
-            await HandleStop();
-            //重新连接业务
-            var middleware = MiddlewareManager.GetMiddleware<IReconnectorMiddleware<TPackage>>();
-            if (middleware != null) await middleware.Reconnector(InnerStartAsync);//这边重连
-        }
-        catch (Exception e)
-        {
-        }
+        throw new NotImplementedException();
     }
 
     private async void InnerHandlePackage(ISession<TPackage> session)
     {
-        try
-        {
-            await foreach (var p in session.RunAsync())
-                if (p != null)
-                    await OnMiddlewareHandle(session, p);
-        }
-        catch (Exception e)
-        {
-        }
-        finally
-        {
-            await HandleStop();
-        }
+       throw new NotImplementedException();
     }
 
     public async ValueTask HandleStop()
     {
-        if (State == EnumNetworkState.Stop) return;
-        State = EnumNetworkState.Stop;
-        var session = _session;
-        _session = null;
-        await OnMiddlewareUnRegister(session);
-        if (!session.IsStop)
-        {
-
-            session.Stop();
-        }
-        OnStateChanged(session, EnumNetworkState.Stop);
+        throw new NotImplementedException();
     }
 
     private void OnStateChanged(ISession<TPackage> session, EnumNetworkState state)
@@ -234,29 +129,17 @@ public class ClientBuilder<TPackage, TSelf> where TSelf : ClientBuilder<TPackage
 
     public ClientBuilder()
     {
-        _container = new Container();
-        _container.Register<ILogManager>(new LogManager());
-        _container.Register<IMiddlewareManager<TPackage>>(new MiddlewareManager<TPackage>());
+        throw new NotImplementedException();
     }
 
     public TSelf AddAction(Action<IContainer> action)
     {
-        if (action == null) return (TSelf)this;
-        _funcs.Add(s =>
-        {
-            action(s);
-            return s;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public IClient<TPackage> Build()
     {
-        var container = _funcs.Aggregate(_container
-            , (c, action) => action(c));
-        var client = new Client<TPackage>(container);
-        container.Register<IClient<TPackage>>(client);
-        return client;
+        throw new NotImplementedException();
     }
 
     public TSelf UseMiddleware<TMiddleware>() where TMiddleware : class, IMiddleware<TPackage>
@@ -273,70 +156,32 @@ public class ClientBuilder<TPackage, TSelf> where TSelf : ClientBuilder<TPackage
 
     public TSelf HandlePackage(Action<ISession<TPackage>, TPackage> action)
     {
-        _funcs.Add(c =>
-        {
-            var middle = new HandleMiddleware<TPackage>(action);
-            c.Register<IMiddleware<TPackage>>(middle);
-            return c;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public TSelf UseConnect(Action<ConnectorOption> optionaction)
     {
-        _funcs.Add(c =>
-        {
-            var option = new ConnectorOption();
-            optionaction(option);
-            c.Register<IConnectorOption>(option);
-            return c;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public TSelf UseSession(Action<SessionOption> optionaction)
     {
-        _funcs.Add(c =>
-        {
-            var option = c.Resolve<ISessionOption>().As<SessionOption>();
-            optionaction(option);
-            return c;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public TSelf UseConsoleLog()
     {
-        _funcs.Add(c =>
-        {
-            var logmanager = c.Resolve<ILogManager>();
-            var logger = new ConsoleLogBuilder().SetDefaultOption().Build();
-            logmanager.Register<IConsoleLogger>(logger);
-            return c;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public TSelf UseLog<TLogger>(Func<IContainer, TLogger> factory) where TLogger : ILogger
     {
-        _funcs.Add(c =>
-        {
-            var logmanager = c.Resolve<ILogManager>();
-            var logger = factory.Invoke(c);
-            logmanager.Register(logger);
-            return c;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public TSelf UseFilter<TPackageFilter>() where TPackageFilter : IPackageFilter<TPackage>
     {
-        _funcs.Add(c =>
-        {
-            c.Register<IPackageFilter<TPackage>, TPackageFilter>(EnumLifetime.Transient);
-            return c;
-        });
-        return (TSelf)this;
+       throw new NotImplementedException();
     }
 }
 
@@ -345,56 +190,28 @@ public class TcpClientBuilder<TPackage, TSelf> : ClientBuilder<TPackage, TSelf>
 {
     public TcpClientBuilder()
     {
-        _funcs.Add(c =>
-        {
-            c.Register<IChannelOption>(new ChannelOption());
-            c.Register<ISessionOption>(new SessionOption());
-            c.Register<IConnector<TPackage>, Connector<TPackage>>(EnumLifetime.Transient);
-            return c;
-        });
+        throw new NotImplementedException();
     }
 
 
     public TSelf UseTcp(string ip, int port, Action<ISession<TPackage>, TPackage> handle)
     {
-        UseConnect(o =>
-        {
-            o.Ip = ip;
-            o.Port = port;
-        });
-        HandlePackage(handle);
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public TSelf UseTcp(string ip, int port)
     {
-        UseConnect(o =>
-        {
-            o.Ip = ip;
-            o.Port = port;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public TSelf UseTcp(string ip, int port, string localip)
     {
-        UseConnect(o =>
-        {
-            o.Ip = ip;
-            o.Port = port;
-            o.LocalIp = localip;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 
     public TSelf UseReconnect()
     {
-        _funcs.Add(c =>
-        {
-            c.Register<IMiddleware<TPackage>>(new ReconnectorMiddleware<TPackage>(c));
-            return c;
-        });
-        return (TSelf)this;
+        throw new NotImplementedException();
     }
 }
 

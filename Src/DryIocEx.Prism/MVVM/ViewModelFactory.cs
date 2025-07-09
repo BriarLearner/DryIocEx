@@ -14,17 +14,7 @@ public static class ViewModelFactory
 {
     private static Func<Type, Type> _resolveViewModelHandle = viewtype =>
     {
-        var attribute = viewtype.GetCustomAttribute<ViewModelAttribute>();
-        if (attribute != null)
-            return attribute.ViewModelType;
-        //没有特性就修改ViewModel
-        var viewtypename = viewtype.FullName;
-        var assemblyname = viewtype.GetTypeInfo().Assembly.FullName;
-        viewtypename = viewtypename.Replace(".Views.", ".ViewModels.");
-        var suffix = viewtypename.EndsWith("View") ? "Model" : "ViewModel";
-        var viewmodelname = string.Format(CultureInfo.InvariantCulture, "{0}{1}, {2}", viewtypename, suffix,
-            assemblyname);
-        return Type.GetType(viewmodelname);
+       throw new NotImplementedException();
     };
 
 
@@ -44,29 +34,12 @@ public static class ViewModelFactory
 
     public static void WireViewModel(FrameworkElement fe, Action<object, object> bind)
     {
-        var viewtype = fe.GetType();
-        var viewmodeltype = _resolveViewModelHandle.Invoke(viewtype);
-        var view = fe;
-        var viewmodel = CreateViewModel(viewmodeltype);
-
-        if (view != null && viewmodel != null)
-        {
-            if (!DesignerProperties.GetIsInDesignMode(fe))
-                _relationshipHandler.Handler(view, viewmodel, ContainerLocator.Container);
-            bind(view, viewmodel);
-        }
+        throw new NotImplementedException();
     }
 
     private static object CreateViewModel(Type viewmodeltype)
     {
-        try
-        {
-            return ContainerLocator.Container?.Resolve(viewmodeltype) ?? Activator.CreateInstance(viewmodeltype);
-        }
-        catch (Exception e)
-        {
-            return null;
-        }
+        throw new NotImplementedException();
     }
 }
 
@@ -98,22 +71,13 @@ public class RelationshipHandler : IViewAndViewModelRelationshipHandler
 
     public void Handler(object view, object viewmodel, IContainer container)
     {
-        if (view == null || viewmodel == null)
-            throw new ArgumentNullException("view or viewmodel is null");
-        _relationshipchain?.Invoke(view, viewmodel, container);
+       throw new NotImplementedException();
     }
 
     public IViewAndViewModelRelationshipHandler InheritsFrom<TView, TViewModel>(
         Action<TView, TViewModel, IContainer> configuration)
     {
-        var previousAction = _relationshipchain;
-        _relationshipchain = (view, viewModel, container) =>
-        {
-            previousAction?.Invoke(view, viewModel, container);
-            if (view is TView tView && viewModel is TViewModel tViewModel) //不是继承的基类就不执行
-                configuration?.Invoke(tView, tViewModel, container);
-        };
-        return this;
+        throw new NotImplementedException();
     }
 }
 
@@ -147,47 +111,7 @@ public static class BindExtension
             viewmodel.CallViewHandler = view.Execute;
         }).ViewModelInheritsFrom<IViewWindow, IViewModelWindow>((view, viewmodel) =>
         {
-            Action<IDialogResult> resquestclosehandler = null;
-            resquestclosehandler = o =>
-            {
-                view.Result = o;
-                view.Close();
-            };
-
-            RoutedEventHandler loadedhandler = null;
-            loadedhandler = (o, e) =>
-            {
-                view.Loaded -= loadedhandler;
-                viewmodel.RequestClose += resquestclosehandler;
-            };
-            view.Loaded += loadedhandler;
-
-            EventHandler activatedhandler = null;
-            activatedhandler = (o, e) => { viewmodel.OnActivated(); };
-            view.Activated += activatedhandler;
-            EventHandler deactivatedhandler = null;
-            deactivatedhandler = (o, e) => { viewmodel.Deactivated(); };
-            view.Deactivated += deactivatedhandler;
-            CancelEventHandler closinghandler = null;
-            closinghandler = (o, e) =>
-            {
-                if (!viewmodel.CanClosed())
-                    e.Cancel = true;
-            };
-            view.Closing += closinghandler;
-
-            EventHandler closedHandler = null;
-            closedHandler = (o, e) =>
-            {
-                view.Activated -= activatedhandler;
-                view.Deactivated -= deactivatedhandler;
-                view.Closing -= closinghandler;
-                view.Closed -= closedHandler;
-                viewmodel.RequestClose -= resquestclosehandler;
-                viewmodel.OnClosed();
-                if (view.Result == null) view.Result = new DialogResult();
-            };
-            view.Closed += closedHandler;
+            throw new NotImplementedException();
         });
     }
 
@@ -195,27 +119,19 @@ public static class BindExtension
     public static IViewAndViewModelRelationshipHandler ViewModelInheritsFrom<TViewModel>(
         this IViewAndViewModelRelationshipHandler @this, Action<FrameworkElement, TViewModel> configuration)
     {
-        if (configuration == null)
-            throw new ArgumentNullException("configuration");
-        return @this.InheritsFrom<FrameworkElement, TViewModel>((view, viewModel, container) =>
-            configuration(view, viewModel));
+        throw new NotImplementedException();
     }
 
     public static IViewAndViewModelRelationshipHandler ViewModelInheritsFrom<TView, TViewModel>(
         this IViewAndViewModelRelationshipHandler @this, Action<TView, TViewModel> configuration)
     {
-        if (configuration == null)
-            throw new ArgumentNullException("configuration");
-        return @this.InheritsFrom<TView, TViewModel>((view, viewModel, container) => configuration(view, viewModel));
+       throw new NotImplementedException();
     }
 
     public static IViewAndViewModelRelationshipHandler OnlyViewModelInheritsFrom<TViewModel>(
         this IViewAndViewModelRelationshipHandler @this, Action<TViewModel, IContainer> configuration)
     {
-        if (configuration == null)
-            throw new ArgumentNullException("configuration");
-        return @this.InheritsFrom<FrameworkElement, TViewModel>((view, viewModel, container) =>
-            configuration(viewModel, container));
+       throw new NotImplementedException();
     }
 }
 

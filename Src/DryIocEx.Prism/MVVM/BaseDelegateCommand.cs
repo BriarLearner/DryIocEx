@@ -34,12 +34,7 @@ public abstract class BaseDelegateCommand : ICommand, IActiveAware
 
     protected internal void ObservesPropertyInternal<T>(Expression<Func<T>> propertyExpression)
     {
-        if (_observedPropertiesExpressions.Contains(propertyExpression.ToString()))
-            throw new ArgumentException($"{propertyExpression} is already being observed.",
-                nameof(propertyExpression));
-
-        _observedPropertiesExpressions.Add(propertyExpression.ToString());
-        PropertyObserver.Observes(propertyExpression, RaiseCanExecuteChanged);
+       throw new NotImplementedException();
     }
 
     #endregion
@@ -54,15 +49,13 @@ public abstract class BaseDelegateCommand : ICommand, IActiveAware
         get => _isActive;
         set
         {
-            if (_isActive == value) return;
-            _isActive = value;
-            OnIsActiveChanged();
+           throw new NotImplementedException();
         }
     }
 
     protected virtual void OnIsActiveChanged()
     {
-        IsActiveChanged?.Invoke(this, EventArgs.Empty);
+        throw new NotImplementedException();
     }
 
     public event EventHandler IsActiveChanged;
@@ -74,7 +67,7 @@ public abstract class BaseDelegateCommand : ICommand, IActiveAware
 
     bool ICommand.CanExecute(object parameter)
     {
-        return CanExecute(parameter);
+       throw new NotImplementedException();
     }
 
     void ICommand.Execute(object parameter)
@@ -90,19 +83,12 @@ public abstract class BaseDelegateCommand : ICommand, IActiveAware
 
     protected virtual void OnCanExecuteChanged()
     {
-        var handler = CanExecuteChanged;
-        if (handler != null)
-        {
-            if (_synchronizationContext != null && _synchronizationContext != SynchronizationContext.Current)
-                _synchronizationContext.Post(o => handler.Invoke(this, EventArgs.Empty), null);
-            else
-                handler.Invoke(this, EventArgs.Empty);
-        }
+        throw new NotImplementedException();
     }
 
     public void RaiseCanExecuteChanged()
     {
-        OnCanExecuteChanged();
+        throw new NotImplementedException();
     }
 
     #endregion
@@ -120,19 +106,7 @@ public class DelegateCommand<T> : BaseDelegateCommand
 
     public DelegateCommand(Action<T> executeMethod, Func<T, bool> canExecuteMethod)
     {
-        if (executeMethod == null || canExecuteMethod == null)
-            throw new ArgumentNullException(nameof(executeMethod), "executeMethod 和 canExecuteMethod 委托都不能为空。");
-
-        var genericTypeInfo = typeof(T).GetTypeInfo();
-
-
-        if (genericTypeInfo.IsValueType)
-            if (!genericTypeInfo.IsGenericType || !typeof(Nullable<>).GetTypeInfo()
-                    .IsAssignableFrom(genericTypeInfo.GetGenericTypeDefinition().GetTypeInfo()))
-                throw new InvalidCastException("T代表DelegateCommand<T> 不是对象也不是 Nullable。");
-
-        _executeMethod = executeMethod;
-        _canExecuteMethod = canExecuteMethod;
+        throw new NotImplementedException();
     }
 
     public override void Execute(object parameter)
@@ -142,7 +116,7 @@ public class DelegateCommand<T> : BaseDelegateCommand
 
     public override bool CanExecute(object parameter)
     {
-        return _canExecuteMethod((T)parameter);
+        throw new NotImplementedException();
     }
 
 
@@ -156,11 +130,7 @@ public class DelegateCommand<T> : BaseDelegateCommand
 
     public DelegateCommand<T> ObservesCanExecute(Expression<Func<bool>> canExecuteExpression)
     {
-        var expression =
-            Expression.Lambda<Func<T, bool>>(canExecuteExpression.Body, Expression.Parameter(typeof(T), "o"));
-        _canExecuteMethod = expression.Compile();
-        ObservesPropertyInternal(canExecuteExpression);
-        return this;
+        throw new NotImplementedException();
     }
 
     #endregion
@@ -178,11 +148,7 @@ public class DelegateCommand : BaseDelegateCommand
 
     public DelegateCommand(Action executeMethod, Func<bool> canExecuteMethod)
     {
-        if (executeMethod == null || canExecuteMethod == null)
-            throw new ArgumentNullException(nameof(executeMethod), "executeMethod 和 canExecuteMethod 委托都不能为空。");
-
-        _executeMethod = executeMethod;
-        _canExecuteMethod = canExecuteMethod;
+        throw new NotImplementedException();
     }
 
     public override void Execute(object parameter = null)
@@ -227,32 +193,7 @@ internal class PropertyObserver
 
     private void SubscribeListeners(Expression propertyExpression)
     {
-        var propNameStack = new Stack<PropertyInfo>();
-        while (propertyExpression is MemberExpression temp) // Gets the root of the property chain.
-        {
-            propertyExpression = temp.Expression;
-            propNameStack.Push(temp.Member as PropertyInfo); // Records the member info as property info
-        }
-
-        if (!(propertyExpression is ConstantExpression constantExpression))
-            throw new NotSupportedException("表达式类型不支持，目前只支持MemberExpression和ConstantExpression");
-
-        var propObserverNodeRoot = new PropertyObserverNode(propNameStack.Pop(), _action); //根节点
-        var previousNode = propObserverNodeRoot;
-        foreach (var propName in propNameStack) //创建与属性链对应的节点链。
-        {
-            var currentNode = new PropertyObserverNode(propName, _action);
-            previousNode.Next = currentNode;
-            previousNode = currentNode;
-        }
-
-        var propOwnerObject = constantExpression.Value;
-
-        if (!(propOwnerObject is INotifyPropertyChanged inpcObject))
-            throw new InvalidOperationException("尝试订阅该属性 " +
-                                                $" '{propObserverNodeRoot.PropertyInfo.Name}' , 但是该属性没有实现 INotifyPropertyChanged接口");
-
-        propObserverNodeRoot.SubscribeListenerFor(inpcObject);
+        throw new NotImplementedException();
     }
 
 
@@ -269,14 +210,7 @@ internal class PropertyObserverNode
 
     public PropertyObserverNode(PropertyInfo propertyInfo, Action action)
     {
-        PropertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
-        _action = () =>
-        {
-            action?.Invoke();
-            if (Next == null) return;
-            Next.UnsubscribeListener(); //确保只调用一次
-            GenerateNextNode(); //重新订阅
-        };
+        throw new NotImplementedException();
     }
 
     public PropertyInfo PropertyInfo { get; }
@@ -292,10 +226,7 @@ internal class PropertyObserverNode
 
     private void UnsubscribeListener()
     {
-        if (_inpcObject != null)
-            _inpcObject.PropertyChanged -= OnPropertyChanged;
-
-        Next?.UnsubscribeListener(); //确保只调用一次
+       throw new NotImplementedException();
     }
 
     #endregion
@@ -304,21 +235,12 @@ internal class PropertyObserverNode
 
     public void SubscribeListenerFor(INotifyPropertyChanged inpcObject)
     {
-        _inpcObject = inpcObject;
-        _inpcObject.PropertyChanged += OnPropertyChanged; //订阅属性改变事件
-
-        if (Next != null) GenerateNextNode(); //子节点订阅
+       throw new NotImplementedException();
     }
 
     private void GenerateNextNode()
     {
-        var nextProperty = PropertyInfo.GetValue(_inpcObject);
-        if (nextProperty == null) return;
-        if (!(nextProperty is INotifyPropertyChanged nextInpcObject))
-            throw new InvalidOperationException("Trying to subscribe PropertyChanged listener in object that " +
-                                                $"owns '{Next.PropertyInfo.Name}' property, but the object does not implements INotifyPropertyChanged.");
-
-        Next.SubscribeListenerFor(nextInpcObject);
+       throw new NotImplementedException();
     }
 
     #endregion

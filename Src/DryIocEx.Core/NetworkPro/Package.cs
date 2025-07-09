@@ -61,19 +61,7 @@ public abstract class TerminatorPackageFilter<TPackage> : IPackageFilter<TPackag
 
     public TPackage Filter(ref SequenceReader<byte> reader)
     {
-        var terminator = _terminator;
-        var span = terminator.Span;
-        ReadOnlySequence<byte> sequence;
-        if (!reader.TryReadTo(out sequence, span, false))
-            return default;
-        try
-        {
-            return Decoder(ref sequence);
-        }
-        finally
-        {
-            reader.Advance(terminator.Length);
-        }
+        throw new NotImplementedException();
     }
 
 
